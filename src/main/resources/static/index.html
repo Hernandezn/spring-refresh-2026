@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<title>Spring Boot REST Service</title>
+		
+		<style>
+			body {
+				background-color: black;
+				color: lime;
+			}
+			
+			#test-output {
+				border: 2px grey inset;
+				padding: 0.5rem;
+				display: inline-block;
+				color: cyan;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>
+			This server hosts a demonstration REST API.
+		</h1>
+		<p>
+			There are currently no other HTML pages, only API endpoints that return data. Here's a response from a test endpoint:
+		</p>
+		
+		<p id="test-output"></p>
+		
+		<script>
+			{
+				const testOutput = document.getElementById('test-output');
+				
+				async function getTestOutput() {
+					const res = await fetch('/test');
+					
+					// const dataObject = await res.json();
+					
+					testOutput.innerText = await res.text();
+				}
+				
+				getTestOutput();
+			}
+		</script>
+	</body>
+</html>
