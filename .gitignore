@@ -44,3 +44,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### H2 Local Database ###
+data/*.db
