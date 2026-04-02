@@ -14,7 +14,7 @@ import jakarta.annotation.PreDestroy;
 
 @Component
 public class ServerRuntimeCaptor {
-	private Long serverRunId = 0L;
+	public static Long serverRunId = 0L;
 	
 	@Autowired
 	private ServerRunHistoryService historyService;

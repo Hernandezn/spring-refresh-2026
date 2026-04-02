@@ -28,9 +28,8 @@ public class RequestHistory {
 	)
 	private Long id;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name="server_run_id", nullable=false)
-	private ServerRunHistory serverRunHistory;
+	@Column(name="server_run_id", insertable=true, updatable=true, nullable=false)
+	private Long serverRunId;
 	
 	@Column(nullable=false)
 	private LocalDateTime requestTime;
@@ -41,4 +40,10 @@ public class RequestHistory {
 	
 	@Column(nullable=false)
 	private String pathUri;
+	
+	
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="server_run_id", insertable=false, updatable=false)
+	private ServerRunHistory serverRunHistory;
 }

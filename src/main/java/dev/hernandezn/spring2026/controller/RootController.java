@@ -25,8 +25,6 @@ public class RootController {
 		@RequestParam(name="message", required=false, defaultValue="No message") String message,
 		Model model
 	) {
-		
-		
 		// builds a model as an internal map, for O(1) accessing
 		model.addAttribute("message", message);
 		model.getAttribute(message);
