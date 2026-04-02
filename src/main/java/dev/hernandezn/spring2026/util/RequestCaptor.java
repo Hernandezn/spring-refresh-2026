@@ -19,10 +19,18 @@ public class RequestCaptor implements HandlerInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-		String uri = request.getRequestURI();
         RequestHttpMethod method = RequestHttpMethod.valueOf(request.getMethod());
+        String uri = request.getRequestURI();
+        String query = request.getQueryString();
         
-        requestHistoryService.captureRequest(LocalDateTime.now(), method, uri);
+        String target;
+        if(query == null) {
+        	target = uri;
+        } else {
+        	target = uri + "?" + query;
+        }
+        
+        requestHistoryService.captureRequest(LocalDateTime.now(), method, target);
 		
 		return true;
 	}

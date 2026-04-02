@@ -18,12 +18,12 @@ public class RequestHistoryService {
 	private RequestHistoryRepo repo;
 	
 	@Transactional
-	public void captureRequest(LocalDateTime now, RequestHttpMethod requestMethod, String requestUri) {
+	public void captureRequest(LocalDateTime now, RequestHttpMethod requestMethod, String requestTarget) {
 		RequestHistory requestHistoryEntry = RequestHistory.builder()
 			.serverRunId(ServerRuntimeCaptor.serverRunId)
 			.requestTime(now)
 			.httpMethod(requestMethod)
-			.pathUri(requestUri)
+			.pathUri(requestTarget)
 		.build();
 		
 		repo.save(requestHistoryEntry);
