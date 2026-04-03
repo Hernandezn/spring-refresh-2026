@@ -16,7 +16,7 @@ import lombok.Data;
 @Entity
 @Data
 @Builder
-public class ServerRunHistory {
+public class UptimeHistory {
 	@Id
 	@GeneratedValue(
 		strategy=GenerationType.AUTO

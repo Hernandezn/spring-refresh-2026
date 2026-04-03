@@ -29,7 +29,7 @@ public class RequestHistory {
 	private Long id;
 	
 	@Column(name="server_run_id", insertable=true, updatable=true, nullable=false)
-	private Long serverRunId;
+	private Long uptimeHistoryId;
 	
 	@Column(nullable=false)
 	private LocalDateTime requestTime;
@@ -45,5 +45,5 @@ public class RequestHistory {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="server_run_id", insertable=false, updatable=false)
-	private ServerRunHistory serverRunHistory;
+	private UptimeHistory uptimeHistory;
 }

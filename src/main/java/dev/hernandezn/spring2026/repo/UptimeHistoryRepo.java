@@ -7,16 +7,16 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import dev.hernandezn.spring2026.entity.ServerRunHistory;
+import dev.hernandezn.spring2026.entity.UptimeHistory;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface ServerRunHistoryRepo extends JpaRepository<ServerRunHistory, Long> {
+public interface UptimeHistoryRepo extends JpaRepository<UptimeHistory, Long> {
 	
 	@Transactional
 	@Modifying
 	@Query(
-		"UPDATE ServerRunHistory a"
+		"UPDATE UptimeHistory a"
 		+ " SET a.shutdownStatusCode = :statusCode,"
 		+ " a.shutdownTime = :shutdownTime"
 		+ " WHERE a.id = :id"

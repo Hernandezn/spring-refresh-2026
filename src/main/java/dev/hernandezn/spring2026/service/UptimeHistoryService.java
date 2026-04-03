@@ -5,19 +5,19 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.hernandezn.spring2026.entity.ServerRunHistory;
-import dev.hernandezn.spring2026.repo.ServerRunHistoryRepo;
+import dev.hernandezn.spring2026.entity.UptimeHistory;
+import dev.hernandezn.spring2026.repo.UptimeHistoryRepo;
 import jakarta.transaction.Transactional;
 
 @Service
-public class ServerRunHistoryService {
+public class UptimeHistoryService {
 	@Autowired
-	private ServerRunHistoryRepo historyRepo;
+	private UptimeHistoryRepo historyRepo;
 	
 	@Transactional
 	public Long captureStartup(LocalDateTime now) {
 		
-		ServerRunHistory startupRecord = ServerRunHistory.builder()
+		UptimeHistory startupRecord = UptimeHistory.builder()
 			.startupTime(now)
 			.shutdownStatusCode((short)1)
 		.build();

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import dev.hernandezn.spring2026.entity.RequestHistory;
 import dev.hernandezn.spring2026.enums.RequestHttpMethod;
 import dev.hernandezn.spring2026.repo.RequestHistoryRepo;
-import dev.hernandezn.spring2026.util.ServerRuntimeCaptor;
+import dev.hernandezn.spring2026.util.UptimeCaptor;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -20,7 +20,7 @@ public class RequestHistoryService {
 	@Transactional
 	public void captureRequest(LocalDateTime now, RequestHttpMethod requestMethod, String requestTarget) {
 		RequestHistory requestHistoryEntry = RequestHistory.builder()
-			.serverRunId(ServerRuntimeCaptor.serverRunId)
+			.uptimeHistoryId(UptimeCaptor.uptimeHistoryId)
 			.requestTime(now)
 			.httpMethod(requestMethod)
 			.pathUri(requestTarget)

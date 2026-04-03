@@ -9,18 +9,18 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Component;
 
 import dev.hernandezn.spring2026.controller.RootController;
-import dev.hernandezn.spring2026.service.ServerRunHistoryService;
+import dev.hernandezn.spring2026.service.UptimeHistoryService;
 import dev.hernandezn.spring2026.service.ShutdownStatusService;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
 
 @Component
 @Slf4j
-public class ServerRuntimeCaptor {
-	public static Long serverRunId = 0L;
+public class UptimeCaptor {
+	public static Long uptimeHistoryId = 0L;
 	
 	@Autowired
-	private ServerRunHistoryService historyService;
+	private UptimeHistoryService historyService;
 	
 	@Autowired
 	private ShutdownStatusService statusService;
@@ -32,13 +32,13 @@ public class ServerRuntimeCaptor {
 		try {
 			now = LocalDateTime.now();
 			
-			serverRunId = historyService.captureStartup(now);
+			uptimeHistoryId = historyService.captureStartup(now);
 		} catch (DataIntegrityViolationException exc) {
 			statusService.initializeStatuses();
 			
 			now = LocalDateTime.now();
 			
-			serverRunId = historyService.captureStartup(now);
+			uptimeHistoryId = historyService.captureStartup(now);
 		}
 		
 		log.info("Startup captured at: " + now);
@@ -48,7 +48,7 @@ public class ServerRuntimeCaptor {
 	public void captureShutdown() {
 		LocalDateTime now = LocalDateTime.now();
 		
-		historyService.captureOkShutdown(serverRunId, now);
+		historyService.captureOkShutdown(uptimeHistoryId, now);
 		
 		log.info("Shutdown captured at: " + now);
 	}
