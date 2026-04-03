@@ -11,7 +11,10 @@ Works being referenced:
 
 - **Uptime Captor & Request Captor**
 
-  Inspired by IIoT uptime tracking. This captures server uptimes & API requests and persists them in a local database. Uptime database entries capture startup & shutdown times, along with whether there was an abnormal shutdown (captured via a shutdown code & lookup table). Every request entry has the path it targets, the time of the request, the HTTP method used, and a foreign key to its uptime window's entry. I've also set up normal to-tile logging using Log4J, but this is extraneous to / in addition to these database-captured custom features.
+  Inspired by IIoT uptime tracking. This captures server uptimes & API requests and persists them in a local database.
+  - Uptime database entries capture startup & shutdown times, along with whether there was an abnormal shutdown (captured via a shutdown code & lookup table).
+  - Every request entry has the path it targets, the time of the request, the HTTP method used, and a foreign key to its uptime window's entry.
+  - I've also set up normal to-tile logging using Log4J, but this is extraneous to / in addition to these database-captured custom features.
 
 # High-level Architecture & Dependencies
 
