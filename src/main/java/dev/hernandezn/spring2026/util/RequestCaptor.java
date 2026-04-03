@@ -10,8 +10,10 @@ import dev.hernandezn.spring2026.enums.RequestHttpMethod;
 import dev.hernandezn.spring2026.service.RequestHistoryService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
+@Slf4j
 public class RequestCaptor implements HandlerInterceptor {
 	
 	@Autowired
@@ -30,7 +32,10 @@ public class RequestCaptor implements HandlerInterceptor {
         	target = uri + "?" + query;
         }
         
-        requestHistoryService.captureRequest(LocalDateTime.now(), method, target);
+        LocalDateTime now = LocalDateTime.now();
+        requestHistoryService.captureRequest(now, method, target);
+        
+        log.info("Http request [" + method + " " + target + "] captured at: " + now);
 		
 		return true;
 	}

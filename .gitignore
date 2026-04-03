@@ -47,3 +47,6 @@ build/
 
 ### H2 Local Database ###
 data/*.db
+
+### Logging ###
+*.log
