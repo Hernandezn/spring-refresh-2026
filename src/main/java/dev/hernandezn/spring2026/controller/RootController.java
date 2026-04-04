@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import dev.hernandezn.spring2026.dto.DemoDTO;
 import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
+@Slf4j
 @RequestMapping("/test")
 public class RootController {
 	private final String template = "API Endpoint reached! Your message: %s";

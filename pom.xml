@@ -85,6 +85,13 @@
 		    <artifactId>lombok</artifactId>
 		    <scope>compile</scope>
 		</dependency>
+		
+		<!-- Internal web browser automation -->
+		<!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
+		<dependency>
+		    <groupId>org.seleniumhq.selenium</groupId>
+		    <artifactId>selenium-java</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

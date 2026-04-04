@@ -1,9 +1,11 @@
-package dev.hernandezn.spring2026.util;
+package dev.hernandezn.spring2026.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import dev.hernandezn.spring2026.util.RequestCaptor;
 
 @Configuration
 public class RequestCaptorConfig implements WebMvcConfigurer {
