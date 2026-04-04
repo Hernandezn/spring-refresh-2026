@@ -50,3 +50,4 @@ data/*.db
 
 ### Logging ###
 *.log
+*.log.*.gz
