@@ -5,6 +5,7 @@ It's meant as a coding sandbox for upcoming projects & practice with the technol
 
 Works being referenced:
 - [Spring Boot official guides](https://spring.io/guides)
+- [Selenium Webdriver documentation](https://www.selenium.dev/documentation/webdriver/)
 - [Client Engagement Portal (from previous work)](https://github.com/revaturelabs/client-engagement-portal-back)
 
 # Features
