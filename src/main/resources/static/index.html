@@ -16,6 +16,14 @@
 				display: inline-block;
 				color: cyan;
 			}
+			
+			#screenshot-api-output {
+				text-align: center;
+			}
+			
+			#screenshot-api-output > img {
+				max-width: 90%;
+			}
 		</style>
 	</head>
 	<body>
@@ -23,10 +31,30 @@
 			This server hosts a demonstration REST API.
 		</h1>
 		<p>
-			There are currently no other HTML pages, only API endpoints that return data. Here's a response from a test endpoint:
+			There are currently no other HTML pages, only API endpoints that return data. 
+			This page is a sample frontend to demonstrate API responses in a live Web browser.
 		</p>
 		
-		<p id="test-output"></p>
+		<p>
+			/test endpoint:
+			
+			<p id="test-output"></p>
+		</p>
+		
+		
+		
+		<p>
+			<form id="screenshot-api-input-form">
+				<label for="screenshot-api-text-input">
+					Enter a URL to receive a screenshot of it through my <code>/screenshot</code> api: 
+				</label>
+				<input type="text" id="screenshot-api-text-input" placeholder="google.com" />
+				
+				<button type="submit">Submit</button>
+			</form>
+			<br />
+			<div id="screenshot-api-output"></div>
+		</p>
 		
 		<script>
 			{
@@ -41,6 +69,24 @@
 				}
 				
 				getTestOutput();
+			}
+			
+			{
+				const screenshotInputForm = document.getElementById('screenshot-api-input-form');
+				const screenshotTextInput = document.getElementById('screenshot-api-text-input');
+				const screenshotOutput = document.getElementById('screenshot-api-output');
+				const screenshot = document.createElement('img');
+				
+				function displayScreenshotApiOutput() {
+					screenshot.src = `/screenshot?url=${screenshotTextInput.value}`;
+					
+					screenshotOutput.appendChild(screenshot);
+				};
+				
+				screenshotInputForm.addEventListener('submit', (submitEvent) => {
+					submitEvent.preventDefault();
+					displayScreenshotApiOutput();
+				});
 			}
 		</script>
 	</body>
