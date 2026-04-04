@@ -9,6 +9,10 @@ Works being referenced:
 
 # Features
 
+- **Website Screenshotter API**
+
+  The GET API endpoint at "/screenshot?url=\[URL]" will create and serve a live screenshot of the URL provided. This API is powered by Selenium Webdriver, and it's provided with thread safety using Java's ExecutorService, to provide an internal task queue for screenshots, to prevent multiple requests from attempting to use a single Webdriver at the same time.
+
 - **Uptime Captor & Request Captor**
 
   Inspired by IIoT uptime tracking. This captures server uptimes & API requests and persists them in a local database.
@@ -20,7 +24,11 @@ Works being referenced:
 
 - **Layered REST API via MVC Components**
 
-  API requests arrive at an MVC controller, then data travels through a Service layer & Repository layer to carry out database communication via Entity models. Responses are DTO models. HTML views are fully servable, and one custom view is already served (through the root path, http://localhost:9012/), with backend model data displayed in the view using JavaScript fetch.
+  API requests arrive at an MVC controller, then data travels through a Service layer & Repository layer to carry out database communication via Entity models. Response JSONs are DTO models. HTML views are fully servable. One custom view is served (on the root path, http://localhost:9012/) for checking API endpoints at a glance, with backend data displayed in this view using JavaScript fetch & DOM manipulation.
+
+- **Selenium Webdriver**
+
+  Runs an internal Web browser to carry out automation tasks that require rendering Web pages.
 
 - **Spring Data JPA**
 
