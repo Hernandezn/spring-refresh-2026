@@ -3,9 +3,10 @@ This is a local Spring Boot RESTful Web API server, for my own experimentation &
 
 It's meant as a coding sandbox for upcoming projects & practice with the technology, not as a deployed Web service.
 
-Works being referenced:
+Resources being referenced:
 - [Spring Boot official guides](https://spring.io/guides)
 - [Selenium Webdriver documentation](https://www.selenium.dev/documentation/webdriver/)
+- [Maven Repository](https://mvnrepository.com/)
 - [Client Engagement Portal (from previous work)](https://github.com/revaturelabs/client-engagement-portal-back)
 
 # Features
