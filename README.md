@@ -9,7 +9,7 @@ Resources being referenced:
 - [Maven Repository](https://mvnrepository.com/)
 - [Client Engagement Portal (from previous work)](https://github.com/revaturelabs/client-engagement-portal-back)
 
-# Features
+# Custom Features
 
 - **Website Screenshotter API**
 
@@ -31,6 +31,10 @@ Resources being referenced:
 - **Selenium Webdriver**
 
   Runs an internal Web browser to carry out automation tasks that require rendering Web pages.
+
+- **Swagger UI with Spring OpenAPI**
+
+  Serves an API documentation page at [/swagger-ui.html](http://localhost:9012/swagger-ui/index.html). API endpoints in the service have Swagger operation annotations, to detail information about API endpoints in Swagger.
 
 - **Spring Data JPA**
 
