@@ -12,7 +12,7 @@ Works being referenced:
 
 - **Website Screenshotter API**
 
-  The GET API endpoint at "/screenshot?url=\[URL]" will create and serve a live screenshot of the URL provided. This API is powered by Selenium Webdriver, and it's provided with thread safety using Java's ExecutorService, to provide an internal task queue for screenshots, to prevent multiple requests from attempting to use a single Webdriver at the same time.
+  The GET API endpoint at "/screenshot?url=\[URL]" will create and serve a live screenshot of the URL provided. This API is powered by Selenium Webdriver, and it's provided with thread safety using Java's ExecutorService, to provide an internal task queue for screenshots.
 
 - **Uptime Captor & Request Captor**
 
