@@ -42,11 +42,9 @@ Resources being referenced:
 
 # How to Run Locally via Terminal
 
-Once this project is in your local system,
+Running this project requires [Java](https://www.oracle.com/java/technologies/downloads/#java21) and [Apache Maven](https://maven.apache.org/download.cgi).
 
-1. [Download Apache Maven (Binary Zip Archive)](https://maven.apache.org/download.cgi)
-   - [Installation instructions](https://maven.apache.org/install.html)
-2. In a command line, open the folder containing this project, and run the following command:
+Once this project is in your local system, open a command line to the folder containing this project, and run the following command:
 ```
    mvn spring-boot:run
 ```
