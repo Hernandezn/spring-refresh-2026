@@ -12,6 +12,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Intercepts incoming HTTP requests to log incoming traffic.
+ * 
+ * Requests are captured both in database entries through RequestHistoryService and in standard text logs through Slf4j logger.
+ * 
+ * This interceptor is added to Spring's request-handling flow through:
+ * dev.hernandezn.spring2026.config.RequestCaptorConfig.java
+ */
 @Component
 @Slf4j
 public class RequestCaptor implements HandlerInterceptor {

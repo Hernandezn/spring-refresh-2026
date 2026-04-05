@@ -9,22 +9,54 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import dev.hernandezn.spring2026.dto.DemoDTO;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * Handles HTTP requests.
+ * 
+ * Provides testing endpoint support.
+ */
 @RestController
 @Slf4j
 @RequestMapping("/test")
 public class RootController {
-	private final String template = "API Endpoint reached! Your message: %s";
+	private final String template = "Hello, %s!";
 	private final AtomicLong requestCounter = new AtomicLong();
 	
-	// Having both the name="message" RequestParam argument and the parameter be named "message" in the method will each work on their own
-	// The required=false statement is also a redundancy that's just there for demonstration
+	/**
+	 * Self-explanatory. Does not speak to other application layers.
+	 * 
+	 * Its only side effect is incrementing the requestCounter in this class.
+	 * 
+	 * @param request 
+	 * @param message String that can be added as a URL parameter to modify the output message
+	 * @param model per-request data mapping item that could be used by a view controller like Thymeleaf
+	 * @return
+	 */
+	@Operation(
+		summary="Test basic functionality", 
+		description="Initial endpoint. A \"Hello World\" for the REST API server.",
+		responses= {
+			@ApiResponse(
+				responseCode="200",
+				description="API endpoint successfully reached",
+				content=@Content(
+					schema=@Schema(
+						implementation=DemoDTO.class
+					)
+				)
+			)
+		}
+	)
 	@GetMapping
 	public DemoDTO testEndpoint(
 		HttpServletRequest request,
-		@RequestParam(name="message", required=false, defaultValue="No message") String message,
+		@RequestParam(name="message", required=false, defaultValue="World") String message,
 		Model model
 	) {
 		// builds a model as an internal map, for O(1) accessing

@@ -9,6 +9,11 @@ import dev.hernandezn.spring2026.entity.ShutdownStatus;
 import dev.hernandezn.spring2026.repo.ShutdownStatusRepo;
 import jakarta.transaction.Transactional;
 
+/**
+ * Sets up the ShutdownStatus lookup table.
+ * 
+ * Not something that exists in a live service, only for the local database being used by this development sandbox, to satisfy foreign key constraints.
+ */
 @Service
 public class ShutdownStatusService {
 	@Autowired
@@ -19,7 +24,7 @@ public class ShutdownStatusService {
 		shutdownStatusRepo.saveAll(
 			List.of(
 				new ShutdownStatus((short)0, "OK"),
-				new ShutdownStatus((short)1, "ABNORMAL")
+				new ShutdownStatus((short)1, "UNPLANNED")
 			)
 		);
 	}

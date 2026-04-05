@@ -59,3 +59,4 @@ Once the server is running, these pages will be available in a Web browser:
   - JDBC URL: `jdbc:h2:./data/localdb`
   - User Name: `sa`
   - Password: (leave this field blank)
+- [localhost:9012/swagger-ui.html](http://localhost:9012/swagger-ui/index.html) - Swagger UI, API documentation tool

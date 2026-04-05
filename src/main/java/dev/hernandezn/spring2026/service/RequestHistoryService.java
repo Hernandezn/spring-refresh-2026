@@ -11,6 +11,12 @@ import dev.hernandezn.spring2026.repo.RequestHistoryRepo;
 import dev.hernandezn.spring2026.util.UptimeCaptor;
 import jakarta.transaction.Transactional;
 
+/**
+ * Captures database entries detailing HTTP requests to the server.
+ * 
+ * Runs on every request through:
+ * dev.hernandezn.spring2026.util.RequestCaptor.java
+ */
 @Service
 public class RequestHistoryService {
 	

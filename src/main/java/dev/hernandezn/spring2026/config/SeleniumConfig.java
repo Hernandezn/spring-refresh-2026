@@ -9,10 +9,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SeleniumConfig {
 
-	// A single WebDriver instance IS NOT THREAD SAFE, so a single-thread executor is used to serialize requests
+	// A single WebDriver instance IS NOT THREAD SAFE; requests should be serialized, like with a single-thread ExecutorService
 	// Typically wouldn't use a browser session per service, and it should be occasionally flushed/restarted...
 	@Bean(destroyMethod="quit")
-	public WebDriver screenshotExecutor() {
+	public WebDriver screenshotDriver() {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless=new");
 		options.addArguments("--window-size=1920,1080");

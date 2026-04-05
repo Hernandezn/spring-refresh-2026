@@ -7,6 +7,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import dev.hernandezn.spring2026.util.RequestCaptor;
 
+/**
+ * Adds the RequestCaptor component to the HTTP request input flow.
+ */
 @Configuration
 public class RequestCaptorConfig implements WebMvcConfigurer {
 	@Autowired

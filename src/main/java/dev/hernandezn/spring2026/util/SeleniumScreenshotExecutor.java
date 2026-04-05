@@ -16,6 +16,13 @@ import org.springframework.stereotype.Component;
 
 import jakarta.annotation.PreDestroy;
 
+/**
+ * Maintains a single-thread ExecutorService to enqueue screenshot requests for the internal Selenium WebDriver.
+ * 
+ * This ensures that concurrent requests are handled one at a time rather than attempting to use the same WebDriver at the same time.
+ * 
+ * This component also provides cleanup and fallback functionality for the internal WebDriver.
+ */
 @Component
 public class SeleniumScreenshotExecutor {
 	
@@ -24,6 +31,12 @@ public class SeleniumScreenshotExecutor {
 	@Autowired
 	private WebDriver seleniumWebDriver;
 	
+	/**
+	 * Enqueues a request for the single-thread ExecutorService to instruct the internal WebDriver to gather a screenshot.
+	 * 
+	 * @param url Web page that this method will screenshot
+	 * @return a Future that resolves to provide a byte array representing the requested screenshot
+	 */
 	public Future<byte[]> takeScreenshot(String url) {
 		return singleThreadExecutor.submit(() -> {
 			try {
@@ -48,11 +61,21 @@ public class SeleniumScreenshotExecutor {
 			// ARTIFICIAL DELAY for animation element completion
 			Thread.sleep(500);
 			
-			return ((TakesScreenshot) seleniumWebDriver).getScreenshotAs(OutputType.BYTES);
+			byte[]result = ((TakesScreenshot) seleniumWebDriver).getScreenshotAs(OutputType.BYTES);
+			
+			cleanupWebDriver();
+			
+			return result;
 		});
 	}
 	
-	private String swapURISchemes(String url) throws InvalidArgumentException {
+	/**
+	 * Swaps "http://" & "https://" as a fallback for any URL that didn't respond.
+	 * 
+	 * @param url
+	 * @return
+	 */
+	private String swapURISchemes(String url) {
 		String[] schemes = {"https://", "http://"};
 		
 		if(url.startsWith(schemes[1])) {
@@ -62,6 +85,30 @@ public class SeleniumScreenshotExecutor {
 		}
 		
 		return url.replaceFirst(schemes[0], schemes[1]);
+	}
+	
+	/**
+	 * Cleans up the WebDriver.
+	 * 
+	 * This should be used to flush any hanging resources (like cookies & local storage items) 
+	 * after the WebDriver is done interacting with a Web page.
+	 */
+	private void cleanupWebDriver() {
+		JavascriptExecutor js = (JavascriptExecutor) seleniumWebDriver;
+		js.executeScript("window.localStorage.clear()");
+		js.executeScript("window.sessionStorage.clear()");
+		
+		seleniumWebDriver.manage().deleteAllCookies();
+		seleniumWebDriver.get("about:blank");
+		
+		// clean up any other windows opened by the visited page
+		String blankPage = seleniumWebDriver.getWindowHandle();
+		for (String handle : seleniumWebDriver.getWindowHandles()) {
+		    if (!handle.equals(blankPage)) {
+		    	seleniumWebDriver.switchTo().window(handle).close();
+		    }
+		}
+		seleniumWebDriver.switchTo().window(blankPage);
 	}
 	
 	@PreDestroy

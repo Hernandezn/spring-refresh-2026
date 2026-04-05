@@ -9,6 +9,12 @@ import dev.hernandezn.spring2026.entity.UptimeHistory;
 import dev.hernandezn.spring2026.repo.UptimeHistoryRepo;
 import jakarta.transaction.Transactional;
 
+/**
+ * Captures database entries detailing uptime timeframes for the server.
+ * 
+ * Runs on server startup & shutdown through:
+ * dev.hernandezn.spring2026.util.UptimeCaptor.java
+ */
 @Service
 public class UptimeHistoryService {
 	@Autowired
