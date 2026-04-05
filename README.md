@@ -51,6 +51,13 @@ Once this project is in your local system,
    mvn spring-boot:run
 ```
 
-The application will have a simple static UI that opens at [localhost:9012](http://localhost:9012/) in a Web browser.
+---
 
-A local database UI will be at [localhost:9012/h2-console](http://localhost:9012/h2-console). In the fields provided, "Driver Class" will be `org.h2.Driver`, "JDBC URL" will be `jdbc:h2:./data/localdb`, "User Name" will be `sa`, and the "Password" field will be blank.
+Once the server is running, these pages will be available in a Web browser:
+
+- [localhost:9012](http://localhost:9012/) - a simple static UI, currently being used to check API endpoint responses at a glance.
+- [localhost:9012/h2-console](http://localhost:9012/h2-console) - a UI for the local database run by the application. If the login form isn't pre-filled, provide these values:
+  - Driver Class: `org.h2.Driver`
+  - JDBC URL: `jdbc:h2:./data/localdb`
+  - User Name: `sa`
+  - Password: (leave this field blank)
