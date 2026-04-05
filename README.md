@@ -39,3 +39,18 @@ Resources being referenced:
 - **Maven, Apache Tomcat, Java 21, application config**
 
   Baseline dependencies for the project. Dependency management through a Maven pom.xml, run configuration through application.properties (may switch to application.yaml), running an embedded Apache Tomcat server, built using Java 21 (highest LTS Java version with full out-of-the-box support from Lombok at the time of creation).
+
+# How to Run Locally via Terminal
+
+Once this project is in your local system,
+
+1. [Download Apache Maven (Binary Zip Archive)](https://maven.apache.org/download.cgi)
+   - [Installation instructions](https://maven.apache.org/install.html)
+2. In a command line, open the folder containing this project, and run the following command:
+```
+   mvn spring-boot:run
+```
+
+The application will have a simple static UI that opens at [localhost:9012](http://localhost:9012/) in a Web browser.
+
+A local database UI will be at [localhost:9012/h2-console](http://localhost:9012/h2-console). In the fields provided, "Driver Class" will be `org.h2.Driver`, "JDBC URL" will be `jdbc:h2:./data/localdb`, "User Name" will be `sa`, and the "Password" field will be blank.
