@@ -43,6 +43,14 @@
 			<scope>test</scope>
 		</dependency>
 		
+		<!-- Required for @WebMvcTest in Spring Boot 4.X -->
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webmvc-test -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-webmvc-test</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		
 		<!-- Rest API Controller dependencies -->
 		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
 		<dependency>
@@ -73,10 +81,12 @@
 			<!-- RECOMMENDED to use "test" scope for any deployed application -->
 			<scope>compile</scope>
 		</dependency>
+		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-h2console</artifactId>
 		</dependency>
+		-->
 		
 		<!-- For quicker boilerplate -->
 		<!-- Source: https://mvnrepository.com/artifact/org.projectlombok/lombok -->

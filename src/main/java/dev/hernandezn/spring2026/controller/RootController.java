@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @RestController
 @Slf4j
-@RequestMapping("/test")
+@RequestMapping("/")
 public class RootController {
 	private final String template = "Hello, %s!";
 	private final AtomicLong requestCounter = new AtomicLong();
@@ -31,7 +31,7 @@ public class RootController {
 	/**
 	 * Self-explanatory. Does not speak to other application layers.
 	 * 
-	 * Its only side effect is incrementing the requestCounter in this class.
+	 * THIS IS NOT IDEMPOTENT, as it increments the requestCounter in this class.
 	 * 
 	 * @param request 
 	 * @param message String that can be added as a URL parameter to modify the output message
@@ -53,7 +53,7 @@ public class RootController {
 			)
 		}
 	)
-	@GetMapping
+	@GetMapping("test")
 	public DemoDTO testEndpoint(
 		HttpServletRequest request,
 		@RequestParam(name="message", required=false, defaultValue="World") String message,
