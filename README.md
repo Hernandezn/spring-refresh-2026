@@ -1,7 +1,7 @@
 # Spring Refresh (2026)
-This is a local Spring Boot RESTful Web API server, for my own experimentation & knowledge review.
+This is a local Spring Boot RESTful Web API server (began March 31st, 2026), for my own experimentation & knowledge review.
 
-It's meant as a coding sandbox for upcoming projects & practice with the technology, not as a deployed Web service.
+It's meant as a coding sandbox for upcoming projects & practice with the technology, not as a live deployed Web service.
 
 Resources being referenced:
 - [Spring Boot official guides](https://spring.io/guides)
