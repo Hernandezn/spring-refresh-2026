@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.hernandezn.spring2026.entity.ShutdownStatus;
-import dev.hernandezn.spring2026.repo.ShutdownStatusRepo;
+import dev.hernandezn.spring2026.repo.ShutdownStatusRepository;
 import jakarta.transaction.Transactional;
 
 /**
@@ -17,7 +17,7 @@ import jakarta.transaction.Transactional;
 @Service
 public class ShutdownStatusService {
 	@Autowired
-	private ShutdownStatusRepo shutdownStatusRepo;
+	private ShutdownStatusRepository shutdownStatusRepo;
 	
 	@Transactional
 	public void initializeStatuses() {

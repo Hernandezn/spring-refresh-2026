@@ -24,11 +24,11 @@ public class ScreenshotService {
 	@Autowired
 	SeleniumScreenshotExecutor screenshotExecutor;
 	
-	public byte[] takeScreenshot(String url) {
+	public byte[] fetchScreenshot(String url) {
 		try {
 			url = normalizeUrl(url);
 			
-			Future<byte[]> futureScreenshot = screenshotExecutor.takeScreenshot(url);
+			Future<byte[]> futureScreenshot = screenshotExecutor.createScreenshot(url);
 			
 			return futureScreenshot.get(5000, TimeUnit.MILLISECONDS);
 		} catch (InterruptedException | ExecutionException | URISyntaxException e) {
@@ -53,6 +53,7 @@ public class ScreenshotService {
 		}
 		
 		URI uri = new URI(url.trim());
+		
 		if(uri.getScheme() == null) {
 			uri = new URI("https://" + url);
 		}

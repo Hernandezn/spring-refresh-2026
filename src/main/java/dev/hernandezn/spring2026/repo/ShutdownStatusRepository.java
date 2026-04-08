@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import dev.hernandezn.spring2026.entity.ShutdownStatus;
 
 @Repository
-public interface ShutdownStatusRepo extends JpaRepository<ShutdownStatus, Short> {
+public interface ShutdownStatusRepository extends JpaRepository<ShutdownStatus, Short> {
 
 }

@@ -36,10 +36,10 @@ import jakarta.persistence.EntityManager;
 public class UptimeHistoryRepoIntegrationTests {
 	
 	@Autowired
-	private UptimeHistoryRepo uptimeHistoryRepo;
+	private UptimeHistoryRepository uptimeHistoryRepo;
 	
 	@Autowired
-	private ShutdownStatusRepo shutdownStatusRepo;
+	private ShutdownStatusRepository shutdownStatusRepo;
 	
 	@Autowired
 	private EntityManager entityManager;
@@ -69,11 +69,14 @@ public class UptimeHistoryRepoIntegrationTests {
 		
 		long uptimeId = historyRecord.getId();
 		short newShutdownStatus = 0;
+		
 		// must be truncated to microseconds, because database datetime types don't usually support the default nanoseconds
 		LocalDateTime assignedShutdownTime = LocalDateTime.now().truncatedTo(ChronoUnit.MICROS);
 		
 		int rowsUpdated = uptimeHistoryRepo.updateShutdownStatusById(uptimeId, newShutdownStatus, assignedShutdownTime);
-		entityManager.clear(); // clears cached entities so the below findById call reaches for the DB to get an updated record
+		
+		// cached entities are cleared so the below findById call reaches back into the DB to get an updated record
+		entityManager.clear();
 		Optional<UptimeHistory> retrievedRecord = uptimeHistoryRepo.findById(uptimeId);
 		
 		assertEquals(

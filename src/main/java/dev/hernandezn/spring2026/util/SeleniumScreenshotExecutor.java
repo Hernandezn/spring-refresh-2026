@@ -37,7 +37,7 @@ public class SeleniumScreenshotExecutor {
 	 * @param url Web page that this method will screenshot
 	 * @return a Future that resolves to provide a byte array representing the requested screenshot
 	 */
-	public Future<byte[]> takeScreenshot(String url) {
+	public Future<byte[]> createScreenshot(String url) {
 		return singleThreadExecutor.submit(() -> {
 			try {
 				

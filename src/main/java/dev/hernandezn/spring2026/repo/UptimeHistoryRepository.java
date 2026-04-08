@@ -11,7 +11,7 @@ import dev.hernandezn.spring2026.entity.UptimeHistory;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface UptimeHistoryRepo extends JpaRepository<UptimeHistory, Long> {
+public interface UptimeHistoryRepository extends JpaRepository<UptimeHistory, Long> {
 	
 	@Transactional
 	@Modifying

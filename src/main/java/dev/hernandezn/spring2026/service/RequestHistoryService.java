@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import dev.hernandezn.spring2026.entity.RequestHistory;
 import dev.hernandezn.spring2026.enums.RequestHttpMethod;
-import dev.hernandezn.spring2026.repo.RequestHistoryRepo;
+import dev.hernandezn.spring2026.repo.RequestHistoryRepository;
 import dev.hernandezn.spring2026.util.UptimeCaptor;
 import jakarta.transaction.Transactional;
 
@@ -21,7 +21,7 @@ import jakarta.transaction.Transactional;
 public class RequestHistoryService {
 	
 	@Autowired
-	private RequestHistoryRepo repo;
+	private RequestHistoryRepository repo;
 	
 	@Transactional
 	public void captureRequest(LocalDateTime now, RequestHttpMethod requestMethod, String requestTarget) {

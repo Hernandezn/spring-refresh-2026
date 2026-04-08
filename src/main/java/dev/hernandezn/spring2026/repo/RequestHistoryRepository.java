@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import dev.hernandezn.spring2026.entity.RequestHistory;
 
 @Repository
-public interface RequestHistoryRepo extends JpaRepository<RequestHistory, Long> {
+public interface RequestHistoryRepository extends JpaRepository<RequestHistory, Long> {
 
 }

@@ -56,7 +56,7 @@ public class ScreenshotController {
 		return ResponseEntity.ok()
 			.contentType(MediaType.IMAGE_PNG)
 			.header("Content-Disposition", "filename=\"screenshot.png\"")
-			.body(service.takeScreenshot(url))
+			.body(service.fetchScreenshot(url))
 		;
 	}
 }

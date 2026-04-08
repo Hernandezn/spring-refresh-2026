@@ -39,7 +39,7 @@ public class ScreenshotControllerTests {
 	@Test
 	void screenshotEndpoint_withNoParameters() throws Exception {
 		byte[] mockImageData = new byte[] {2, 4, 6, 8, 10};
-		when(mockScreenshotService.takeScreenshot(anyString())).thenReturn(mockImageData);
+		when(mockScreenshotService.fetchScreenshot(anyString())).thenReturn(mockImageData);
 		
 		mockMvc.perform(get("/screenshot"))
 			.andExpect(status().isOk())
@@ -48,7 +48,7 @@ public class ScreenshotControllerTests {
 			.andExpect(content().bytes(mockImageData))
 		;
 		
-		verify(mockScreenshotService).takeScreenshot("https://www.google.com/");
+		verify(mockScreenshotService).fetchScreenshot("https://www.google.com/");
 	}
 	
 	@Test
@@ -58,8 +58,8 @@ public class ScreenshotControllerTests {
 		
 		String urlParam = "example.com";
 		
-		when(mockScreenshotService.takeScreenshot(anyString())).thenReturn(mockFailedImage);
-		when(mockScreenshotService.takeScreenshot(urlParam)).thenReturn(mockSuccessImage);
+		when(mockScreenshotService.fetchScreenshot(anyString())).thenReturn(mockFailedImage);
+		when(mockScreenshotService.fetchScreenshot(urlParam)).thenReturn(mockSuccessImage);
 		
 		mockMvc.perform(get("/screenshot").param("url", urlParam))
 			.andExpect(status().isOk())
@@ -68,6 +68,6 @@ public class ScreenshotControllerTests {
 			.andExpect(content().bytes(mockSuccessImage))
 		;
 		
-		verify(mockScreenshotService).takeScreenshot(urlParam);
+		verify(mockScreenshotService).fetchScreenshot(urlParam);
 	}
 }
