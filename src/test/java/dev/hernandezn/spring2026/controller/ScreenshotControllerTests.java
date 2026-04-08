@@ -37,7 +37,7 @@ public class ScreenshotControllerTests {
 	private ScreenshotService mockScreenshotService;
 	
 	@Test
-	void testScreenshotEndpoint_withDefaultResponse() throws Exception {
+	void screenshotEndpoint_withNoParameters() throws Exception {
 		byte[] mockImageData = new byte[] {2, 4, 6, 8, 10};
 		when(mockScreenshotService.takeScreenshot(anyString())).thenReturn(mockImageData);
 		
@@ -52,7 +52,7 @@ public class ScreenshotControllerTests {
 	}
 	
 	@Test
-	void testScreenshotEndpoint_withUrlParameterResponse() throws Exception {
+	void screenshotEndpoint_withUrlParameter() throws Exception {
 		byte[] mockFailedImage = new byte[] {};
 		byte[] mockSuccessImage = new byte[] {1, 2, 3, 4, 5};
 		
