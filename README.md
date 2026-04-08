@@ -30,7 +30,7 @@ Resources being referenced:
 
 - **Unit Testing with JUnit & Mockito**
 
-  Unit tests are performed across the application. The Controller and Repository layers additionally have @WebMvcTest and @DataJpaTest, respectively, to perform slice testing, for checking HTTP response outputs and database-persisted record outputs.
+  Unit tests are performed across the application. The Controller and Repository layers additionally have @WebMvcTest and @DataJpaTest, respectively, to perform slice testing / partial integration testing, for checking HTTP response outputs and database-persisted record outputs.
 
 - **Selenium Webdriver**
 
