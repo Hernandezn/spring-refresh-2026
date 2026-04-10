@@ -1,7 +1,7 @@
 # Spring Refresh (2026)
-This is a local Spring Boot RESTful Web API server, for my own experimentation & knowledge review.
+This is a local Spring Boot RESTful Web API server (began March 31st, 2026), for my own experimentation & knowledge review.
 
-It's meant as a coding sandbox for upcoming projects & practice with the technology, not as a deployed Web service.
+It's meant as a coding sandbox for upcoming projects & practice with the technology, not as a live deployed Web service.
 
 Resources being referenced:
 - [Spring Boot official guides](https://spring.io/guides)
@@ -26,7 +26,11 @@ Resources being referenced:
 
 - **Layered REST API via MVC Components**
 
-  API requests arrive at an MVC controller, then data travels through a Service layer & Repository layer to carry out database communication via Entity models. Response JSONs are DTO models. HTML views are fully servable. One custom view is served (on the root path, http://localhost:9012/) for checking API endpoints at a glance, with backend data displayed in this view using JavaScript fetch & DOM manipulation.
+  API requests arrive at an MVC controller, then data travels through a Service layer & Repository layer to carry out database communication via Entity models. Response JSONs are DTO models. HTML views are fully servable. One custom view is served (on the root path, http://localhost:9012/) for checking API endpoints at a glance, with API data displayed in this view using JavaScript fetch & DOM manipulation.
+
+- **Unit Testing with JUnit & Mockito**
+
+  Unit tests are performed across the application. The Controller and Repository layers additionally have @WebMvcTest and @DataJpaTest, respectively, to perform slice testing / partial integration testing, for checking HTTP response outputs and database-persisted record outputs.
 
 - **Selenium Webdriver**
 
