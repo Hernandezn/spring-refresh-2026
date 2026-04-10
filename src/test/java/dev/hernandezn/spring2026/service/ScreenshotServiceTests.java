@@ -22,12 +22,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import dev.hernandezn.spring2026.util.SeleniumScreenshotExecutor;
+import dev.hernandezn.spring2026.util.ScreenshotExecutor;
 
 @ExtendWith(MockitoExtension.class)
 public class ScreenshotServiceTests {
 	@Mock
-	SeleniumScreenshotExecutor screenshotExecutor;
+	ScreenshotExecutor screenshotExecutor;
 	
 	@InjectMocks
 	ScreenshotService screenshotService;

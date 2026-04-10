@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dev.hernandezn.spring2026.util.SeleniumScreenshotExecutor;
+import dev.hernandezn.spring2026.util.ScreenshotExecutor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ScreenshotService {
 	@Autowired
-	SeleniumScreenshotExecutor screenshotExecutor;
+	ScreenshotExecutor screenshotExecutor;
 	
 	public byte[] fetchScreenshot(String url) {
 		try {

@@ -1,8 +1,11 @@
 package dev.hernandezn.spring2026.controller;
 
+// named the same as the MockMvcResultMathers content() method; don't get them mixed
+//import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -14,6 +17,9 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import dev.hernandezn.spring2026.dto.DemoDTO;
 import dev.hernandezn.spring2026.util.RequestCaptor;
 
 @WebMvcTest(controllers=RootController.class)
@@ -56,9 +62,15 @@ public class RootControllerTests {
 			.andExpect(jsonPath("$.counter").value(3))
 		;
 		
+		// this is another way to assess the JSON returned
+		// can be better for longer items, to avoid long .andExpect() chains & make expected fields' details detachable from the test
+		// private ObjectMapper objectMapper can be @Autowired in Spring's test context
+		ObjectMapper objectMapper = new ObjectMapper();
+		DemoDTO expectedReturnValue = new DemoDTO(4L, "Hello, World!");
+		
 		mockMvc.perform(get("/test"))
 			.andExpect(status().isOk())
-			.andExpect(jsonPath("$.counter").value(4))
+			.andExpect(content().json(objectMapper.writeValueAsString(expectedReturnValue)))
 		;
 	}
 }

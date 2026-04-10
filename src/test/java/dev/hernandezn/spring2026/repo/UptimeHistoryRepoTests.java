@@ -33,7 +33,7 @@ import jakarta.persistence.EntityManager;
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DataJpaTest
-public class UptimeHistoryRepoIntegrationTests {
+public class UptimeHistoryRepoTests {
 	
 	@Autowired
 	private UptimeHistoryRepository uptimeHistoryRepo;
