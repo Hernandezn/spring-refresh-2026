@@ -3,7 +3,6 @@ package dev.hernandezn.spring2026.config;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +17,8 @@ public class SeleniumConfig {
 	// A single WebDriver instance IS NOT THREAD SAFE; requests should be serialized, like with a single-thread ExecutorService
 	// Typically wouldn't use a browser session per service, and it should be occasionally flushed/restarted...
 	@Bean(
-		destroyMethod="quit",
-		name="seleniumScreenshotter"
+		name="seleniumScreenshotter",
+		destroyMethod="quit"
 	)
 	public WebScreenshotBrowser screenshotBrowser() {
 		ChromeOptions options = new ChromeOptions();

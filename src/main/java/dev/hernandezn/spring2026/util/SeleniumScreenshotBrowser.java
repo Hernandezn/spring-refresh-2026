@@ -8,7 +8,6 @@ import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.stereotype.Component;
 
 import dev.hernandezn.spring2026.port.WebScreenshotBrowser;
 
@@ -22,7 +21,7 @@ import dev.hernandezn.spring2026.port.WebScreenshotBrowser;
  * Any tests of this class would need to be integration or slice tests, using 
  * real WebDriver behavior instead of mocked behavior.
  */
-@Component
+// this class is NOT a project @Component; set up as a Bean before autowiring
 public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	private WebDriver driver;
 	
