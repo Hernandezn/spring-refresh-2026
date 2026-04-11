@@ -2,6 +2,7 @@ package dev.hernandezn.spring2026.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -14,8 +15,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import dev.hernandezn.spring2026.entity.RequestHistory;
-import dev.hernandezn.spring2026.enums.RequestHttpMethod;
+import dev.hernandezn.spring2026.enums.HttpRequestMethod;
 import dev.hernandezn.spring2026.repo.RequestHistoryRepository;
+import dev.hernandezn.spring2026.util.UptimeCaptor;
 
 @ExtendWith(MockitoExtension.class)
 public class RequestHistoryServiceTests {
@@ -23,14 +25,20 @@ public class RequestHistoryServiceTests {
 	@Mock
 	private RequestHistoryRepository requestHistoryRepo;
 	
+	@Mock
+	private UptimeCaptor uptimeCaptor;
+	
 	@InjectMocks
 	private RequestHistoryService requestHistoryService;
 	
 	@Test
 	void captureRequest_shouldCreateAndSaveRequestHistory() {
+		Long requestUptimeHistoryId = 10L;
 		LocalDateTime requestTime = LocalDateTime.now().truncatedTo(ChronoUnit.MICROS);
-		RequestHttpMethod requestMethod = RequestHttpMethod.GET;
+		HttpRequestMethod requestMethod = HttpRequestMethod.GET;
 		String requestTarget = "/some-test-path";
+		
+		when(uptimeCaptor.getUptimeHistoryId()).thenReturn(requestUptimeHistoryId);
 		
 		requestHistoryService.captureRequest(requestTime, requestMethod, requestTarget);
 		
@@ -38,6 +46,11 @@ public class RequestHistoryServiceTests {
 		verify(requestHistoryRepo).save(argCaptor.capture());
 		
 		RequestHistory requestRecord = argCaptor.getValue();
+		assertEquals(
+			requestUptimeHistoryId, 
+			requestRecord.getUptimeHistoryId(),
+			"The record saved to the database should have the uptime history ID that was returned from the uptimeCaptor"
+		);
 		assertEquals(
 			requestTime, 
 			requestRecord.getRequestTime(),

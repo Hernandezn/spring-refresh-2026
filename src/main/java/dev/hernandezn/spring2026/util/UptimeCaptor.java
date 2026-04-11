@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import dev.hernandezn.spring2026.service.ShutdownStatusService;
 import dev.hernandezn.spring2026.service.UptimeHistoryService;
 import jakarta.annotation.PreDestroy;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -21,13 +22,15 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class UptimeCaptor {
-	public static Long uptimeHistoryId = 0L;
+	
+	@Getter
+	private Long uptimeHistoryId = 0L;
 	
 	@Autowired
-	private UptimeHistoryService historyService;
+	private UptimeHistoryService uptimeHistoryService;
 	
 	@Autowired
-	private ShutdownStatusService statusService;
+	private ShutdownStatusService shutdownStatusService;
 	
 	@EventListener(ApplicationReadyEvent.class)
 	public void captureStartup() {
@@ -36,15 +39,15 @@ public class UptimeCaptor {
 		try {
 			now = LocalDateTime.now();
 			
-			uptimeHistoryId = historyService.captureStartup(now);
+			uptimeHistoryId = uptimeHistoryService.captureStartup(now);
 		} catch (DataIntegrityViolationException exc) {
 			
 			// satisfies FKEY constraint if local database isn't initialized
-			statusService.initializeStatuses();
+			shutdownStatusService.initializeStatuses();
 			
 			now = LocalDateTime.now();
 			
-			uptimeHistoryId = historyService.captureStartup(now);
+			uptimeHistoryId = uptimeHistoryService.captureStartup(now);
 		}
 		
 		log.info("Startup captured at: " + now);
@@ -54,7 +57,7 @@ public class UptimeCaptor {
 	public void captureShutdown() {
 		LocalDateTime now = LocalDateTime.now();
 		
-		historyService.captureOkShutdown(uptimeHistoryId, now);
+		uptimeHistoryService.captureOkShutdown(uptimeHistoryId, now);
 		
 		log.info("Shutdown captured at: " + now);
 	}

@@ -79,7 +79,7 @@ public class ScreenshotServiceTests {
 		
 		verify(
 			screenshotExecutor, 
-			times(3).description("3 missing URLs hould request the screenshot of a default URL exactly 3 times")
+			times(3).description("3 missing URLs should request the screenshot of a default URL exactly 3 times")
 		).createScreenshot("https://www.google.com");
 	}
 	

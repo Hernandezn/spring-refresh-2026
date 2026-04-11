@@ -3,7 +3,7 @@ package dev.hernandezn.spring2026.enums;
 /**
  * HTTP request-type enumeration for use by RequestHistory database entries.
  */
-public enum RequestHttpMethod {
+public enum HttpRequestMethod {
 	GET,
 	POST,
 	PUT,

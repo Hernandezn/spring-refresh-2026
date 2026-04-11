@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
-import dev.hernandezn.spring2026.enums.RequestHttpMethod;
+import dev.hernandezn.spring2026.enums.HttpRequestMethod;
 import dev.hernandezn.spring2026.service.RequestHistoryService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ public class RequestCaptor implements HandlerInterceptor {
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
-        RequestHttpMethod method = RequestHttpMethod.valueOf(request.getMethod());
+        HttpRequestMethod method = HttpRequestMethod.valueOf(request.getMethod());
         String uri = request.getRequestURI();
         String query = request.getQueryString();
         

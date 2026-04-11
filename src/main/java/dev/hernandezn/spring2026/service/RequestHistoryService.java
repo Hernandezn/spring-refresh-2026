@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import dev.hernandezn.spring2026.entity.RequestHistory;
-import dev.hernandezn.spring2026.enums.RequestHttpMethod;
+import dev.hernandezn.spring2026.enums.HttpRequestMethod;
 import dev.hernandezn.spring2026.repo.RequestHistoryRepository;
 import dev.hernandezn.spring2026.util.UptimeCaptor;
 import jakarta.transaction.Transactional;
@@ -23,10 +23,13 @@ public class RequestHistoryService {
 	@Autowired
 	private RequestHistoryRepository repo;
 	
+	@Autowired
+	private UptimeCaptor uptimeCaptor;
+	
 	@Transactional
-	public void captureRequest(LocalDateTime now, RequestHttpMethod requestMethod, String requestTarget) {
+	public void captureRequest(LocalDateTime now, HttpRequestMethod requestMethod, String requestTarget) {
 		RequestHistory requestHistoryEntry = RequestHistory.builder()
-			.uptimeHistoryId(UptimeCaptor.uptimeHistoryId)
+			.uptimeHistoryId(uptimeCaptor.getUptimeHistoryId())
 			.requestTime(now)
 			.httpMethod(requestMethod)
 			.pathUri(requestTarget)

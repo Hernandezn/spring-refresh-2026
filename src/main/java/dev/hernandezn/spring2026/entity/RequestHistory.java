@@ -2,7 +2,7 @@ package dev.hernandezn.spring2026.entity;
 
 import java.time.LocalDateTime;
 
-import dev.hernandezn.spring2026.enums.RequestHttpMethod;
+import dev.hernandezn.spring2026.enums.HttpRequestMethod;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -36,7 +36,7 @@ public class RequestHistory {
 	
 	@Column(nullable=false)
 	@Enumerated(EnumType.STRING)
-	private RequestHttpMethod httpMethod;
+	private HttpRequestMethod httpMethod;
 	
 	@Column(nullable=false)
 	private String pathUri;
