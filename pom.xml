@@ -151,8 +151,10 @@
 	            <groupId>org.apache.maven.plugins</groupId>
 	            <artifactId>maven-surefire-plugin</artifactId>
 	            <configuration>
+	            	<!-- using "${argline}" to APPEND TO the arguments instead of replacing them -->
+	            	<!-- needed for Jacoco to work, as it injects " -javaagent:jacocoagent.jar " -->
 	                <argLine>
-	                    -javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar
+	                    ${argLine} -javaagent:${settings.localRepository}/net/bytebuddy/byte-buddy-agent/1.17.8/byte-buddy-agent-1.17.8.jar
 	                </argLine>
 	            </configuration>
 	        </plugin>
@@ -184,7 +186,7 @@
 	
 	<!-- Additional Jacoco setup -->
 	<!-- https://www.jacoco.org/jacoco/trunk/doc/maven.html -->
-	<!--
+	
 	<reporting>
 		<plugins>
 			<plugin>
@@ -200,6 +202,6 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	-->
+	
 
 </project>
