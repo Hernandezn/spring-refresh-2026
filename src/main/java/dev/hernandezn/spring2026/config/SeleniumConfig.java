@@ -24,7 +24,7 @@ public class SeleniumConfig {
 		ChromeOptions options = new ChromeOptions();
 		options.addArguments("--headless=new");
 		options.addArguments("--window-size=1920,1080");
-		return new SeleniumScreenshotBrowser(new ChromeDriver(options));
+		return SeleniumScreenshotBrowser.create(new ChromeDriver(options));
 	}
 	
 	/**

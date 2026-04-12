@@ -25,17 +25,45 @@ import dev.hernandezn.spring2026.port.WebScreenshotBrowser;
 public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	private WebDriver driver;
 	
-	public SeleniumScreenshotBrowser(
-		WebDriver driver
+	private TakesScreenshot screenshotter;
+	
+	private JavascriptExecutor js;
+	
+	SeleniumScreenshotBrowser(
+		WebDriver driver,
+		TakesScreenshot screenshotter,
+		JavascriptExecutor js
 	) {
-		if(!(driver instanceof TakesScreenshot)) {
+		
+		this.driver = driver;
+		this.screenshotter = screenshotter;
+		this.js = js;
+	}
+	
+	/**
+	 * Static factory method to safeguard the constructor from using a 
+	 * WebDriver that isn't compatible with this screenshot implementation.
+	 * 
+	 * Eliminates the need to cast the WebDriver within operations, while 
+	 * making the TakesScreenshot and JavascriptExecutor components injectable 
+	 * & mockable.
+	 * 
+	 * @param driver
+	 * @return
+	 */
+	public static SeleniumScreenshotBrowser create(WebDriver driver) {
+		if(!(driver instanceof TakesScreenshot screenshotter)) {
 			throw new IllegalStateException("Driver must support screenshots");
 		}
-		if (!(driver instanceof JavascriptExecutor)) {
+		if (!(driver instanceof JavascriptExecutor js)) {
 			throw new IllegalStateException("Driver must support Javascript execution");
 		}
 		
-		this.driver = driver;
+		return new SeleniumScreenshotBrowser(
+			driver,
+			screenshotter,
+			js
+		);
 	}
 
 	@Override
@@ -66,7 +94,7 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	public byte[] takeScreenshotAfterMs(long milliseconds) {
 		WebDriverWait waitForRender = new WebDriverWait(driver, Duration.ofMillis(4000));
 		waitForRender.until((driver) ->
-			((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete") )
+			js.executeScript("return document.readyState").equals("complete") )
 		;
 		
 		// ARTIFICIAL DELAY for animation element completion
@@ -76,7 +104,7 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 			Thread.currentThread().interrupt();
 		}
 		
-		return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+		return screenshotter.getScreenshotAs(OutputType.BYTES);
 	}
 
 	/**
@@ -87,7 +115,6 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	 */
 	@Override
 	public void flush() {
-		JavascriptExecutor js = (JavascriptExecutor) driver;
 		js.executeScript("window.localStorage.clear()");
 		js.executeScript("window.sessionStorage.clear()");
 		
