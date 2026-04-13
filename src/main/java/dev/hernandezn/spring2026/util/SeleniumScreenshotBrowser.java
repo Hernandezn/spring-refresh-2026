@@ -1,6 +1,7 @@
 package dev.hernandezn.spring2026.util;
 
 import java.time.Duration;
+import java.util.function.Consumer;
 
 import org.openqa.selenium.InvalidArgumentException;
 import org.openqa.selenium.JavascriptExecutor;
@@ -29,15 +30,19 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	
 	private JavascriptExecutor js;
 	
+	private Consumer<Long> delayFunction;
+	
 	SeleniumScreenshotBrowser(
 		WebDriver driver,
 		TakesScreenshot screenshotter,
-		JavascriptExecutor js
+		JavascriptExecutor js,
+		Consumer<Long> delayFunction
 	) {
 		
 		this.driver = driver;
 		this.screenshotter = screenshotter;
 		this.js = js;
+		this.delayFunction = delayFunction;
 	}
 	
 	/**
@@ -62,25 +67,20 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 		return new SeleniumScreenshotBrowser(
 			driver,
 			screenshotter,
-			js
+			js,
+			(Long ms) -> { 
+				try {
+					Thread.sleep(ms);
+				} catch (InterruptedException e) {
+					Thread.currentThread().interrupt();
+				}
+			}
 		);
 	}
 
 	@Override
 	public void targetUrl(String url) throws InvalidArgumentException {
 		driver.get(url);
-	}
-
-	/**
-	 * Screenshots the targeted page as soon as it finishes loading.
-	 * 
-	 * Times out if the page takes 4 seconds to render.
-	 * 
-	 * @param webdriver
-	 */
-	@Override
-	public byte[] takeScreenshot() {
-		return takeScreenshotAfterMs(0);
 	}
 	
 	/**
@@ -98,13 +98,21 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 		;
 		
 		// ARTIFICIAL DELAY for animation element completion
-		try {
-			Thread.sleep(milliseconds);
-		} catch (InterruptedException e) {
-			Thread.currentThread().interrupt();
-		}
+		delayFunction.accept(milliseconds);
 		
 		return screenshotter.getScreenshotAs(OutputType.BYTES);
+	}
+	
+	/**
+	 * Screenshots the targeted page as soon as it finishes loading.
+	 * 
+	 * Times out if the page takes 4 seconds to render.
+	 * 
+	 * @param webdriver
+	 */
+	@Override
+	public byte[] takeScreenshot() {
+		return takeScreenshotAfterMs(0);
 	}
 
 	/**
