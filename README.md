@@ -52,7 +52,7 @@ Resources being referenced:
       📊 JaCoCo test coverage report from April 13, 2026
     </summary>
 
-    ![jacoco_report_20260413](https://github.com/user-attachments/assets/283ccb10-d3ea-4b3f-a724-b220c27c0f60)
+    ![jacoco_report_20260413](./docs/images/jacoco_report_20260413.webp)
   </details>
 
 - **Maven, Apache Tomcat, Java 21, application config**
