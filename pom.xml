@@ -26,9 +26,24 @@
 		<tag/>
 		<url/>
 	</scm>
+	
 	<properties>
 		<java.version>21</java.version>
+		
+		<!--
+			For use while running SonarQube server on my local system at 
+			localhost:9000
+			
+			Scans are initiated through my own custom Maven build 
+			configuration in Eclipse. In deployment, I would get the Sonar 
+			token from an environment config that reads its value from a 
+			secret and makes the value available for use in the application.
+		-->
+		<sonar.projectKey>Spring-Refresh-2026</sonar.projectKey>
+		<sonar.host.url>http://localhost:9000</sonar.host.url>
+		<sonar.token>${env.SONAR_TOKEN}</sonar.token>
 	</properties>
+	
 	<dependencies>
 		<!-- Spring Boot Starter - Basic Spring Starter project backbone -->
 		<dependency>
@@ -181,12 +196,20 @@
 					</execution>
 				</executions>
 			</plugin>
+			
+			<!-- Sonar for code linting -->
+			<!-- Source: https://mvnrepository.com/artifact/org.sonarsource.scanner.maven/sonar-maven-plugin -->
+			<!-- Running as plugin; this doesn't belong in the runtime, it only analyzes the build -->
+			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>5.6.0.6792</version>
+		    </plugin>
 		</plugins>
 	</build>
 	
 	<!-- Additional Jacoco setup -->
 	<!-- https://www.jacoco.org/jacoco/trunk/doc/maven.html -->
-	
 	<reporting>
 		<plugins>
 			<plugin>

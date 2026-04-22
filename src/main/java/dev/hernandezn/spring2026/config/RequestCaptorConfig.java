@@ -17,8 +17,13 @@ import dev.hernandezn.spring2026.util.RequestCaptor;
 @Configuration
 @ConditionalOnProperty(name="request-captor.enabled", havingValue="true", matchIfMissing=true)
 public class RequestCaptorConfig implements WebMvcConfigurer {
+	
+	private final RequestCaptor captor;
+	
 	@Autowired
-	private RequestCaptor captor;
+	public RequestCaptorConfig(RequestCaptor captor) {
+		this.captor = captor;
+	}
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
