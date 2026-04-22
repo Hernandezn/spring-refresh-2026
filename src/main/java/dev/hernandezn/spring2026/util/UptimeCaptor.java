@@ -26,11 +26,18 @@ public class UptimeCaptor {
 	@Getter
 	private Long uptimeHistoryId = 0L;
 	
-	@Autowired
-	private UptimeHistoryService uptimeHistoryService;
+	private final UptimeHistoryService uptimeHistoryService;
+	
+	private final ShutdownStatusService shutdownStatusService;
 	
 	@Autowired
-	private ShutdownStatusService shutdownStatusService;
+	public UptimeCaptor(
+		UptimeHistoryService uptimeHistoryService,
+		ShutdownStatusService shutdownStatusService
+	) {
+		this.uptimeHistoryService = uptimeHistoryService;
+		this.shutdownStatusService = shutdownStatusService;
+	}
 	
 	@EventListener(ApplicationReadyEvent.class)
 	public void captureStartup() {

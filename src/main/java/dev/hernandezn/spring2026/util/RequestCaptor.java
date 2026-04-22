@@ -24,8 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RequestCaptor implements HandlerInterceptor {
 	
+	private final RequestHistoryService requestHistoryService;
+	
 	@Autowired
-	RequestHistoryService requestHistoryService;
+	public RequestCaptor(RequestHistoryService requestHistoryService) {
+		this.requestHistoryService = requestHistoryService;
+	}
 	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {

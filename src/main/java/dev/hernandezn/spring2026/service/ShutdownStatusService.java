@@ -16,8 +16,13 @@ import jakarta.transaction.Transactional;
  */
 @Service
 public class ShutdownStatusService {
+
+	private final ShutdownStatusRepository shutdownStatusRepo;
+	
 	@Autowired
-	private ShutdownStatusRepository shutdownStatusRepo;
+	public ShutdownStatusService(ShutdownStatusRepository shutdownStatusRepo) {
+		this.shutdownStatusRepo = shutdownStatusRepo;
+	}
 	
 	@Transactional
 	public void initializeStatuses() {

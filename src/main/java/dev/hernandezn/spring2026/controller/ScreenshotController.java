@@ -24,8 +24,12 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/screenshot")
 public class ScreenshotController {
 	
+	private final ScreenshotService service;
+	
 	@Autowired
-	ScreenshotService service;
+	public ScreenshotController(ScreenshotService service) {
+		this.service = service;
+	}
 	
 	@Operation(
 		summary="Take a website screenshot remotely", 

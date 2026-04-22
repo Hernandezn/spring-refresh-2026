@@ -17,8 +17,13 @@ import jakarta.transaction.Transactional;
  */
 @Service
 public class UptimeHistoryService {
+	
+	private final UptimeHistoryRepository historyRepo;
+	
 	@Autowired
-	private UptimeHistoryRepository historyRepo;
+	public UptimeHistoryService(UptimeHistoryRepository historyRepo) {
+		this.historyRepo = historyRepo;
+	}
 	
 	@Transactional
 	public Long captureStartup(LocalDateTime now) {

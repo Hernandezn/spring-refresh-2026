@@ -54,6 +54,18 @@ Resources being referenced:
 
     ![jacoco_report_20260413](./docs/images/jacoco_report_20260413.webp)
   </details>
+  
+- **Sonar Code Quality Tool**
+
+  Using a locally run server instance of [SonarQube](https://www.sonarsource.com/open-source-editions/sonarqube-community-edition/), the application generates a code quality report that a developer can use to improve application security, reliability, and maintainability.
+  
+  <details>
+    <summary>
+      📊 <ins>Sonar code quality report from April 22, 2026</ins>
+    </summary>
+
+    ![sonar_report_20260422](./docs/images/sonar_report_20260422.webp)
+  </details>
 
 - **Maven, Apache Tomcat, Java 21, application config**
 

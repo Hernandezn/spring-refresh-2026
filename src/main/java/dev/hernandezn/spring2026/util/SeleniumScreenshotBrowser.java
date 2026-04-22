@@ -87,9 +87,13 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	 * Waits for the WebDriver to render the page, delays by the input number 
 	 * of milliseconds, then returns a screenshot of the page at that point.
 	 * 
-	 * Times out if the page takes 4 seconds to render.
+	 * Times out if the page takes 4 seconds to render. This 4-second rule is 
+	 * applied only for initial rendering, and only after that initial is the 
+	 * input "milliseconds" delay timer started used.
 	 * 
-	 * @param webdriver
+	 * @param milliseconds Number of milliseconds to delay screenshotting, 
+	 * 		allowing for any animation elements to take on a desired state 
+	 * 		before the screenshot is taken
 	 */
 	public byte[] takeScreenshotAfterMs(long milliseconds) {
 		WebDriverWait waitForRender = new WebDriverWait(driver, Duration.ofMillis(4000));
@@ -107,8 +111,6 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	 * Screenshots the targeted page as soon as it finishes loading.
 	 * 
 	 * Times out if the page takes 4 seconds to render.
-	 * 
-	 * @param webdriver
 	 */
 	@Override
 	public byte[] takeScreenshot() {

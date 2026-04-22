@@ -20,11 +20,15 @@ import jakarta.transaction.Transactional;
 @Service
 public class RequestHistoryService {
 	
-	@Autowired
-	private RequestHistoryRepository repo;
+	private final RequestHistoryRepository repo;
+	
+	private final UptimeCaptor uptimeCaptor;
 	
 	@Autowired
-	private UptimeCaptor uptimeCaptor;
+	public RequestHistoryService(RequestHistoryRepository repo, UptimeCaptor uptimeCaptor) {
+		this.repo = repo;
+		this.uptimeCaptor = uptimeCaptor;
+	}
 	
 	@Transactional
 	public void captureRequest(LocalDateTime now, HttpRequestMethod requestMethod, String requestTarget) {

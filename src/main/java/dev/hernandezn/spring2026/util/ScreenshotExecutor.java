@@ -20,13 +20,22 @@ import dev.hernandezn.spring2026.port.WebScreenshotBrowser;
 @Component
 public class ScreenshotExecutor {
 	
-	@Autowired
-	@Qualifier("seleniumScreenshotter")
-	private WebScreenshotBrowser browser;
+	private final WebScreenshotBrowser browser;
 	
-	@Autowired
-	@Qualifier("screenshotTaskExecutor")
-	private ExecutorService singleThreadExecutor;
+	private final ExecutorService singleThreadExecutor;
+	
+	public ScreenshotExecutor(
+		@Autowired
+		@Qualifier("seleniumScreenshotter")
+		WebScreenshotBrowser browser,
+		
+		@Autowired
+		@Qualifier("screenshotTaskExecutor")
+		ExecutorService singleThreadExecutor
+	) {
+		this.browser = browser;
+		this.singleThreadExecutor = singleThreadExecutor;
+	}
 	
 	/**
 	 * Enqueues a request for the single-thread ExecutorService to instruct the internal WebDriver to gather a screenshot.
