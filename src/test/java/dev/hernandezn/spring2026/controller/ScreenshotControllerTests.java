@@ -1,11 +1,11 @@
 package dev.hernandezn.spring2026.controller;
 
+// CAREFUL here; this shares a name with the MockMvcResultMatchers method:
+// don't import "org.springframework.test.web.client.match.MockRestRequestMatchers.content"
+
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-
-// CAREFUL here; this shares a name with the MockMvcResultMatchers method
-//import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -25,7 +25,7 @@ import dev.hernandezn.spring2026.util.RequestCaptor;
 
 @WebMvcTest(controllers=ScreenshotController.class)
 @TestPropertySource(properties="request-captor.enabled=false")
-public class ScreenshotControllerTests {
+class ScreenshotControllerTests {
 	
 	@Autowired
 	private MockMvc mockMvc;

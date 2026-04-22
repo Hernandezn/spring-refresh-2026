@@ -19,7 +19,7 @@ import dev.hernandezn.spring2026.entity.UptimeHistory;
 import dev.hernandezn.spring2026.repo.UptimeHistoryRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class UptimeHistoryServiceTests {
+class UptimeHistoryServiceTests {
 	@Mock
 	UptimeHistoryRepository uptimeHistoryRepo;
 	
@@ -34,17 +34,15 @@ public class UptimeHistoryServiceTests {
 		// makes the save method return an UptimeHistory record that has its ID set
 		when(uptimeHistoryRepo.save(any(UptimeHistory.class)))
 			.thenAnswer(
-				(uptimeHistoryMockInvocation) -> {
-					// returning a cloned output so that the captured input remains pre-save / without the id mutation
+				uptimeHistoryMockInvocation -> {
+					// returning a CLONED output so that the captured input remains pre-save / without the id mutation
 					UptimeHistory historyEntryInput = uptimeHistoryMockInvocation.getArgument(0);
-					UptimeHistory historyEntryOutput = UptimeHistory.builder()
+					
+					return UptimeHistory.builder()
 						.id(expectedId)
 						.startupTime(historyEntryInput.getStartupTime())
 						.shutdownStatusCode(historyEntryInput.getShutdownStatusCode())
 					.build();
-					
-					
-					return historyEntryOutput;
 				}
 			)
 		;

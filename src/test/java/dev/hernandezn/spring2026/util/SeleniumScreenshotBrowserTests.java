@@ -30,7 +30,7 @@ import org.openqa.selenium.WebDriver.Options;
 import org.openqa.selenium.WebDriver.TargetLocator;
 
 @ExtendWith(MockitoExtension.class)
-public class SeleniumScreenshotBrowserTests {
+class SeleniumScreenshotBrowserTests {
 	
 	@Mock
 	WebDriver driver;

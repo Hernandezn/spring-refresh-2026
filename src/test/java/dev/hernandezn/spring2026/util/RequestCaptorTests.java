@@ -22,7 +22,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @ExtendWith(MockitoExtension.class)
-public class RequestCaptorTests {
+class RequestCaptorTests {
 	
 	@Mock
 	RequestHistoryService requestHistoryService;

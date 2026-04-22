@@ -19,7 +19,7 @@ import dev.hernandezn.spring2026.service.ShutdownStatusService;
 import dev.hernandezn.spring2026.service.UptimeHistoryService;
 
 @ExtendWith(MockitoExtension.class)
-public class UptimeCaptorTests {
+class UptimeCaptorTests {
 	
 	@Mock
 	UptimeHistoryService uptimeHistoryService;

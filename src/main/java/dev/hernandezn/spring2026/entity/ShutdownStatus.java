@@ -20,4 +20,4 @@ public class ShutdownStatus {
 	
 	@Column(length=15)
 	String status;
-};
+}

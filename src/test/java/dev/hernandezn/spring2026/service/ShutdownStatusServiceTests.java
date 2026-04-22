@@ -16,7 +16,7 @@ import dev.hernandezn.spring2026.entity.ShutdownStatus;
 import dev.hernandezn.spring2026.repo.ShutdownStatusRepository;
 
 @ExtendWith(MockitoExtension.class)
-public class ShutdownStatusServiceTests {
+class ShutdownStatusServiceTests {
 	
 	@Mock
 	private ShutdownStatusRepository shutdownStatusRepo;

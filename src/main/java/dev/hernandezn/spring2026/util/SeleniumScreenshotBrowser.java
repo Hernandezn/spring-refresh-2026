@@ -97,7 +97,7 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 	 */
 	public byte[] takeScreenshotAfterMs(long milliseconds) {
 		WebDriverWait waitForRender = new WebDriverWait(driver, Duration.ofMillis(4000));
-		waitForRender.until((driver) ->
+		waitForRender.until(driverDuringRender ->
 			js.executeScript("return document.readyState").equals("complete") )
 		;
 		

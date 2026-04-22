@@ -25,8 +25,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequestMapping("/")
 public class RootController {
-	private final String template = "Hello, %s!";
-	private final AtomicLong requestCounter = new AtomicLong();
+	private static final String TEMPLATE = "Hello, %s!";
+	private static final AtomicLong REQUEST_COUNTER = new AtomicLong();
 	
 	/**
 	 * Self-explanatory. Does not speak to other application layers.
@@ -63,6 +63,6 @@ public class RootController {
 		model.addAttribute("message", message);
 		model.getAttribute(message);
 		
-		return new DemoDTO(requestCounter.incrementAndGet(), template.formatted(message));
+		return new DemoDTO(REQUEST_COUNTER.incrementAndGet(), TEMPLATE.formatted(message));
 	}
 }

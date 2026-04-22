@@ -61,10 +61,14 @@ Resources being referenced:
   
   <details>
     <summary>
-      📊 <ins>Sonar code quality report from April 22, 2026</ins>
+      📊 <ins>Sonar code quality reports from April 22, 2026</ins>
     </summary>
 
-    ![sonar_report_20260422](./docs/images/sonar_report_20260422.webp)
+	Initial report:
+    ![sonar_report_20260422a](./docs/images/sonar_report_20260422a.webp)
+    
+    Report after a full round of fixes:
+    ![sonar_report_20260422b](./docs/images/sonar_report_20260422b.webp)
   </details>
 
 - **Maven, Apache Tomcat, Java 21, application config**

@@ -33,7 +33,7 @@ import jakarta.persistence.EntityManager;
 @ActiveProfiles("test")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @DataJpaTest
-public class UptimeHistoryRepoTests {
+class UptimeHistoryRepoTests {
 	
 	@Autowired
 	private UptimeHistoryRepository uptimeHistoryRepo;
@@ -80,8 +80,8 @@ public class UptimeHistoryRepoTests {
 		Optional<UptimeHistory> retrievedRecord = uptimeHistoryRepo.findById(uptimeId);
 		
 		assertEquals(
-			rowsUpdated, 
-			1, 
+			1,
+			rowsUpdated,
 			"Only 1 row should be updated"
 		);
 		assertTrue(

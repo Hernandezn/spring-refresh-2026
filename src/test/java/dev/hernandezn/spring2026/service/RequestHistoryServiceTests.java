@@ -20,7 +20,7 @@ import dev.hernandezn.spring2026.repo.RequestHistoryRepository;
 import dev.hernandezn.spring2026.util.UptimeCaptor;
 
 @ExtendWith(MockitoExtension.class)
-public class RequestHistoryServiceTests {
+class RequestHistoryServiceTests {
 	
 	@Mock
 	private RequestHistoryRepository requestHistoryRepo;

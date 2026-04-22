@@ -1,7 +1,7 @@
 package dev.hernandezn.spring2026.controller;
 
-// named the same as the MockMvcResultMathers content() method; don't get them mixed
-//import static org.springframework.test.web.client.match.MockRestRequestMatchers.content;
+// named the same as the MockMvcResultMathers content() method; don't get them mixed:
+// don't import "org.springframework.test.web.client.match.MockRestRequestMatchers.content"
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -25,7 +25,7 @@ import dev.hernandezn.spring2026.util.RequestCaptor;
 @WebMvcTest(controllers=RootController.class)
 @TestPropertySource(properties="request-captor.enabled=false")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class RootControllerTests {
+class RootControllerTests {
 	
 	@Autowired
 	private MockMvc mockMvc;

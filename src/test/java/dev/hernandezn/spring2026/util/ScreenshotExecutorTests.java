@@ -27,7 +27,7 @@ import org.openqa.selenium.InvalidArgumentException;
 import dev.hernandezn.spring2026.port.WebScreenshotBrowser;
 
 @ExtendWith(MockitoExtension.class)
-public class ScreenshotExecutorTests {
+class ScreenshotExecutorTests {
 	
 	@Mock
 	WebScreenshotBrowser browser;
@@ -152,7 +152,7 @@ public class ScreenshotExecutorTests {
 		;
 		assertThrows(
 			InvalidArgumentException.class, 
-			() -> executedLambda.call()
+			executedLambda::call
 		);
 		
 		verify(
@@ -172,6 +172,8 @@ public class ScreenshotExecutorTests {
 	private Callable<byte[]> extractLambdaFromExecutorServiceSubmit(String inputUrl) {
 		ArgumentCaptor<Callable<byte[]>> submitArgCaptor = ArgumentCaptor.forClass(Callable.class);
 		when(singleThreadExecutor.submit(submitArgCaptor.capture())).thenReturn(mock(Future.class));
+		
+		// runs the executor submit so its argument can be captured
 		screenshotExecutor.createScreenshot(inputUrl);
 		
 		return submitArgCaptor.getValue();

@@ -25,7 +25,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import dev.hernandezn.spring2026.util.ScreenshotExecutor;
 
 @ExtendWith(MockitoExtension.class)
-public class ScreenshotServiceTests {
+class ScreenshotServiceTests {
 	@Mock
 	ScreenshotExecutor screenshotExecutor;
 	
@@ -66,7 +66,7 @@ public class ScreenshotServiceTests {
 	}
 	
 	@Test
-	void fetchScreenshot_shouldUseFallbackUrlForNullOrBlankOrEmptyInput() throws Exception {
+	void fetchScreenshot_shouldUseFallbackUrlForNullOrBlankOrEmptyInput() {
 		byte[] expectedBytes = new byte[] {1, 2, 3, 4, 5};
 		
 		when(screenshotExecutor.createScreenshot(anyString())).thenReturn(
@@ -84,7 +84,7 @@ public class ScreenshotServiceTests {
 	}
 	
 	@Test
-	void fetchScreenshot_shouldReturnEmptyForUnparseableUris() throws Exception {
+	void fetchScreenshot_shouldReturnEmptyForUnparseableUris() {
 		String inputUrl = "ht tps://ww w.goo gle.c om";
 		
 		// no cover needed for takeScreenshot, since that method is never reached here
