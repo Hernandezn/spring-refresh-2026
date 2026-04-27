@@ -61,22 +61,6 @@
 			<scope>test</scope>
 		</dependency>
 		
-		<!-- Required for @WebMvcTest in Spring Boot 4.X -->
-		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webmvc-test -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-webmvc-test</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		
-		<!-- Required for @DataJpaTest in Spring Boot 4.X -->
-		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa-test -->
-		<dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-data-jpa-test</artifactId>
-		    <scope>test</scope>
-		</dependency>
-		
 		<!-- Rest API Controller dependencies -->
 		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-web -->
 		<dependency>
@@ -118,6 +102,22 @@
 		    <groupId>org.projectlombok</groupId>
 		    <artifactId>lombok</artifactId>
 		    <scope>compile</scope>
+		</dependency>
+		
+		<!-- Required for @WebMvcTest in Spring Boot 4.X -->
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-webmvc-test -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-webmvc-test</artifactId>
+		    <scope>test</scope>
+		</dependency>
+		
+		<!-- Required for @DataJpaTest in Spring Boot 4.X -->
+		<!-- Source: https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-data-jpa-test -->
+		<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-data-jpa-test</artifactId>
+		    <scope>test</scope>
 		</dependency>
 		
 		<!-- Internal web browser automation -->
