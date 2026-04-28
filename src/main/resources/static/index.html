@@ -10,7 +10,7 @@
 				color: lime;
 			}
 			
-			#test-output {
+			.json-output {
 				border: 2px grey inset;
 				padding: 0.5rem;
 				display: inline-block;
@@ -38,7 +38,7 @@
 		<p>
 			/test endpoint:
 			
-			<p id="test-output"></p>
+			<p id="test-output" class="json-output"></p>
 		</p>
 		
 		
@@ -56,9 +56,77 @@
 			<div id="screenshot-api-output"></div>
 		</p>
 		
+		
+		
+		<p>
+			Login credentials for testing:
+			
+			<ul>
+				<li>
+					Username - either "user" or "admin"
+				</li>
+				<li>
+					Password - just "password"
+				</li>
+			</ul>
+		</p>
+		
+		
+		
+		<p>
+			<form id="login-api-input-form" method="post" action="/login">
+				<table>
+					<tr>
+						<td>
+							<label for="username-input">Username:</label>
+						</td>
+						<td>
+							<input type="text" name="username" id="username-input" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label for="password-input">Password:</label>
+						</td>
+						<td>
+							<input type="password" name="password" id="password-input" />
+						</td>
+					</tr>
+				</table>
+				<br />
+				<button type="submit">Login</button>
+			</form>
+			<br />
+			<div id="logged-in-message">...</div>
+		</p>
+		
+		<p>
+			<p>
+				<button id="user-check-btn">
+					Confirm User Login
+				</button>
+				<div id="user-check-output" class="json-output">...</div>
+			</p>
+			
+			<br />
+			
+			<p>
+				<button id="admin-check-btn">
+					Confirm Admin Login
+				</button>
+				<div id="admin-check-output" class="json-output">...</div>
+			</p>
+			
+			<button id="logout-btn">
+				Logout
+			</button>
+		</p>
+		
 		<script>
-			{
-				const testOutput = document.getElementById('test-output');
+			const getElement = id => document.getElementById(id);
+		
+			{ // interactivity for /test endpoint
+				const testOutput = getElement('test-output');
 				
 				async function getTestOutput() {
 					const res = await fetch('/test');
@@ -71,14 +139,16 @@
 				getTestOutput();
 			}
 			
+			// interactivity for /screenshot endpoint
 			{
-				const screenshotInputForm = document.getElementById('screenshot-api-input-form');
-				const screenshotTextInput = document.getElementById('screenshot-api-text-input');
-				const screenshotOutput = document.getElementById('screenshot-api-output');
-				const screenshot = document.createElement('img');
+				const screenshotInputForm = getElement('screenshot-api-input-form');
+				const screenshotTextInput = getElement('screenshot-api-text-input');
+				const screenshotOutput = getElement('screenshot-api-output');
+				const screenshot = getElement('img');
 				
 				function displayScreenshotApiOutput() {
 					screenshot.src = `/screenshot?url=${screenshotTextInput.value}`;
+					screenshot.alt = `screenshot of {screenshotTextInput.value}`;
 					
 					screenshotOutput.appendChild(screenshot);
 				};
@@ -86,6 +156,66 @@
 				screenshotInputForm.addEventListener('submit', (submitEvent) => {
 					submitEvent.preventDefault();
 					displayScreenshotApiOutput();
+				});
+			}
+			
+			// interactivity for POST /login
+			{
+				const loginForm = getElement('login-api-input-form');
+				const passwordInput = getElement('password-input');
+				const usernameInput = getElement('username-input');
+				const loggedInMessageOutput = getElement('logged-in-message');
+				
+				loginForm.addEventListener('submit', async (submitEvent) => {
+					submitEvent.preventDefault();
+					
+					const response = await fetch('/login', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/x-www-form-urlencoded'
+						},
+						body: new URLSearchParams({
+							username: usernameInput.value,
+							password: passwordInput.value
+						})
+					});
+					
+					usernameInput.value = '';
+					passwordInput.value = '';
+					
+					loggedInMessageOutput.innerText = await response.text();
+				});
+			}
+			
+			// interactivity for user & admin role checks, plus logout
+			{
+				const userCheckBtn = getElement('user-check-btn');
+				const userCheckOutput = getElement('user-check-output');
+				const adminCheckBtn = getElement('admin-check-btn');
+				const adminCheckOutput = getElement('admin-check-output');
+				
+				const logoutBtn = getElement('logout-btn');
+				
+				const wireButton = (btn, output, endpoint) => {
+					btn.addEventListener('click', async (event) => {
+						const response = await fetch(endpoint);
+						
+						output.innerText = 
+							response.status != 200 || response.headers.get('Content-Type') == 'text/html;charset=UTF-8'
+							? 'NOT confirmed.'
+							: await response.text()
+						;
+					});
+				}
+				
+				wireButton(userCheckBtn, userCheckOutput, '/user-endpoint');
+				wireButton(adminCheckBtn, adminCheckOutput, '/admin-endpoint');
+				
+				logoutBtn.addEventListener('click', async (event) => {
+					await fetch('/logout', {method: 'POST'});
+					
+					userCheckOutput.innerText = '...';
+					adminCheckOutput.innerText = '...';
 				});
 			}
 		</script>

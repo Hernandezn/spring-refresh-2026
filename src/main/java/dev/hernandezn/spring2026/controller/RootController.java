@@ -2,6 +2,7 @@ package dev.hernandezn.spring2026.controller;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,5 +65,15 @@ public class RootController {
 		model.getAttribute(message);
 		
 		return new DemoDTO(REQUEST_COUNTER.incrementAndGet(), TEMPLATE.formatted(message));
+	}
+	
+	@GetMapping("user-endpoint")
+	public ResponseEntity<String> userEndpoint() {
+		return ResponseEntity.ok().body("Confirmed that a user is logged in!");
+	}
+	
+	@GetMapping("admin-endpoint")
+	public ResponseEntity<String> adminEndpoint() {
+		return ResponseEntity.ok().body("Confirmed that an admin is logged in!");
 	}
 }
