@@ -3,6 +3,7 @@ package dev.hernandezn.spring2026.service;
 import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import dev.hernandezn.spring2026.entity.UptimeHistory;
@@ -26,6 +27,7 @@ public class UptimeHistoryService {
 	}
 	
 	@Transactional
+	@Cacheable(cacheNames="uptimeId")
 	public Long captureStartup(LocalDateTime now) {
 		
 		UptimeHistory startupRecord = UptimeHistory.builder()
