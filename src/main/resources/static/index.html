@@ -144,7 +144,7 @@
 				const screenshotInputForm = getElement('screenshot-api-input-form');
 				const screenshotTextInput = getElement('screenshot-api-text-input');
 				const screenshotOutput = getElement('screenshot-api-output');
-				const screenshot = getElement('img');
+				const screenshot = document.createElement('img');
 				
 				function displayScreenshotApiOutput() {
 					screenshot.src = `/screenshot?url=${screenshotTextInput.value}`;
