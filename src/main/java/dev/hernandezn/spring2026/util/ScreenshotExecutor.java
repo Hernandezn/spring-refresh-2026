@@ -1,5 +1,7 @@
 package dev.hernandezn.spring2026.util;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import dev.hernandezn.spring2026.port.WebScreenshotBrowser;
+import net.coobird.thumbnailator.Thumbnails;
 
 /**
  * Maintains a single-thread ExecutorService to enqueue screenshot requests for the internal Selenium WebDriver.
@@ -61,6 +64,14 @@ public class ScreenshotExecutor {
 			
 			byte[] result = browser.takeScreenshotAfterMs(0);
 			browser.flush();
+			
+//			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//			Thumbnails.of(new ByteArrayInputStream(result))
+//				.size(300, 300)
+//				.outputFormat("png")
+//				.toOutputStream(outputStream)
+//			;
+//			byte[] thumbnail = outputStream.toByteArray();
 			
 			return result;
 		});

@@ -102,7 +102,7 @@ public class SeleniumScreenshotBrowser implements WebScreenshotBrowser {
 		;
 		
 		// ARTIFICIAL DELAY for animation element completion
-		delayFunction.accept(milliseconds);
+//		delayFunction.accept(milliseconds);
 		
 		return screenshotter.getScreenshotAs(OutputType.BYTES);
 	}
