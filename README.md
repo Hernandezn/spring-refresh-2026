@@ -1,5 +1,5 @@
 # Spring Refresh (2026)
-This is a local Spring Boot RESTful Web API server, for my own experimentation & knowledge review.
+This is a local Spring Boot RESTful Web API server, for my demonstration, experimentation, and knowledge review.
 
 It's meant as a coding sandbox for my upcoming projects & practice with the technology, not as a live deployed Web service. Some enterprise practices (like logging & high unit test coverage) are applied for practice & reference.
 
@@ -21,6 +21,10 @@ Resources being referenced:
   - Uptime database entries capture startup & shutdown times, along with whether there was an abnormal shutdown (captured via a shutdown code & lookup table).
   - Every request entry has the path it targets, the time of the request, the HTTP method used, and a foreign key to its uptime window's entry.
   - I've also set up normal to-file logging using Log4J, but this is extraneous to / in addition to these database-captured custom traceability features.
+
+- **Thumbnail API**
+
+  Simple purpose-built POST API endpoint at "/thumbnail" that scales the input image. Works with a single button click on a form in the included UI that's served from http://localhost:9012/ whenever the server is running. This is both a POC and a utility feature that I'll be using for new & upcoming projects.
 
 # High-level Architecture & Dependencies
 
