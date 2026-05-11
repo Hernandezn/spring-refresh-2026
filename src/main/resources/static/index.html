@@ -10,6 +10,17 @@
 				color: lime;
 			}
 			
+			section {
+				border: 1px solid lime;
+				padding: 8px;
+				margin: 2rem 0;
+			}
+			
+			footer {
+				width: 1px;
+				height: 25dvh;
+			}
+			
 			.json-output {
 				border: 2px grey inset;
 				padding: 0.5rem;
@@ -17,7 +28,8 @@
 				color: cyan;
 			}
 			
-			#screenshot-api-output {
+			#screenshot-api-output,
+			#thumbnail-api-output {
 				text-align: center;
 			}
 			
@@ -35,92 +47,132 @@
 			This page is a sample frontend to demonstrate API responses in a live Web browser.
 		</p>
 		
-		<p>
-			/test endpoint:
-			
-			<p id="test-output" class="json-output"></p>
-		</p>
-		
-		
-		
-		<p>
-			<form id="screenshot-api-input-form">
-				<label for="screenshot-api-text-input">
-					Enter a URL to receive a screenshot of it through my <code>/screenshot</code> api: 
-				</label>
-				<input type="text" id="screenshot-api-text-input" placeholder="google.com" />
+		<section>
+			<p>
+				/test endpoint:
 				
-				<button type="submit">Submit</button>
-			</form>
-			<br />
-			<div id="screenshot-api-output"></div>
-		</p>
+				<p id="test-output" class="json-output"></p>
+			</p>
+		</section>
 		
 		
 		
-		<p>
-			Login credentials for testing:
-			
-			<ul>
-				<li>
-					Username - either "user" or "admin"
-				</li>
-				<li>
-					Password - just "password"
-				</li>
-			</ul>
-		</p>
-		
-		
-		
-		<p>
-			<form id="login-api-input-form" method="post" action="/login">
-				<table>
-					<tr>
-						<td>
-							<label for="username-input">Username:</label>
-						</td>
-						<td>
-							<input type="text" name="username" id="username-input" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<label for="password-input">Password:</label>
-						</td>
-						<td>
-							<input type="password" name="password" id="password-input" />
-						</td>
-					</tr>
-				</table>
+		<section>
+			<p>
+				<form id="screenshot-api-input-form">
+					<label for="screenshot-api-text-input">
+						Enter a URL to receive a screenshot of it through the <code>/screenshot</code> api: 
+					</label>
+					<input type="text" id="screenshot-api-text-input" placeholder="google.com" />
+					
+					<button type="submit">Submit</button>
+				</form>
 				<br />
-				<button type="submit">Login</button>
+				<div id="screenshot-api-output"></div>
+			</p>
+		</section>
+		
+		
+		
+		<section>
+			<form action="/thumbnail" method="post" enctype="multipart/form-data" id="thumbnail-api-input-form">
+				<label for="thumbnail-api-image-input">
+					Choose an image to be resized through the <code>/thumbnail</code> api:
+				</label>
+				<input type="file" id="thumbnail-api-image-input" name="thumbnail_input" accept="image/*"  />
+			
+				<br />
+				<br />
+			
+				<label for="thumbnail-api-width-input">
+					Select a maximum width (in pixels): 
+				</label>
+				<input type="number" id="thumbnail-api-width-input" name="thumbnail_width" value="175"  min="1" step="1" />
+				
+				<br />
+				
+				<label for="thumbnail-api-height-input">
+					Select a maximum height (in pixels): 
+				</label>
+				<input type="number" id="thumbnail-api-height-input" name="thumbnail_height" value="175" min="1" step="1" />
+				
+				<br />
+				
+				<button type="submit">Get Thumbnail</button>
 			</form>
 			<br />
-			<div id="logged-in-message">...</div>
-		</p>
+			<div id="thumbnail-api-output"></div>
+		</section>
 		
-		<p>
+		
+		
+		<section>
 			<p>
-				<button id="user-check-btn">
-					Confirm User Login
-				</button>
-				<div id="user-check-output" class="json-output">...</div>
+				Login credentials for testing:
+				
+				<ul>
+					<li>
+						Username - either "user" or "admin"
+					</li>
+					<li>
+						Password - just "password"
+					</li>
+				</ul>
 			</p>
 			
-			<br />
+			
 			
 			<p>
-				<button id="admin-check-btn">
-					Confirm Admin Login
-				</button>
-				<div id="admin-check-output" class="json-output">...</div>
+				<form id="login-api-input-form" method="post" action="/login">
+					<table>
+						<tr>
+							<td>
+								<label for="username-input">Username:</label>
+							</td>
+							<td>
+								<input type="text" name="username" id="username-input" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="password-input">Password:</label>
+							</td>
+							<td>
+								<input type="password" name="password" id="password-input" />
+							</td>
+						</tr>
+					</table>
+					<br />
+					<button type="submit">Login</button>
+				</form>
+				<br />
+				<div id="logged-in-message">...</div>
 			</p>
 			
-			<button id="logout-btn">
-				Logout
-			</button>
-		</p>
+			<p>
+				<p>
+					<button id="user-check-btn">
+						Confirm User Login
+					</button>
+					<div id="user-check-output" class="json-output">...</div>
+				</p>
+				
+				<br />
+				
+				<p>
+					<button id="admin-check-btn">
+						Confirm Admin Login
+					</button>
+					<div id="admin-check-output" class="json-output">...</div>
+				</p>
+				
+				<button id="logout-btn">
+					Logout
+				</button>
+			</p>
+		</section>
+		
+		<footer></footer>
 		
 		<script>
 			const getElement = id => document.getElementById(id);
@@ -128,7 +180,7 @@
 			{ // interactivity for /test endpoint
 				const testOutput = getElement('test-output');
 				
-				async function getTestOutput() {
+				const getTestOutput = async () => {
 					const res = await fetch('/test');
 					
 					// const dataObject = await res.json();
@@ -147,6 +199,7 @@
 				const screenshot = document.createElement('img');
 				
 				function displayScreenshotApiOutput() {
+					// implicit GET request by setting the parameterized endpoint as img src
 					screenshot.src = `/screenshot?url=${screenshotTextInput.value}`;
 					screenshot.alt = `screenshot of {screenshotTextInput.value}`;
 					
@@ -159,64 +212,98 @@
 				});
 			}
 			
-			// interactivity for POST /login
+			// interactivity for /thumbnail POST endpoint
 			{
-				const loginForm = getElement('login-api-input-form');
-				const passwordInput = getElement('password-input');
-				const usernameInput = getElement('username-input');
-				const loggedInMessageOutput = getElement('logged-in-message');
+				const thumbnailInputForm = getElement('thumbnail-api-input-form');
+				const thumbnailOutput = getElement('thumbnail-api-output');
+				const thumbnail = document.createElement('img');
+				thumbnail.alt = 'Thumbnail API output image';
 				
-				loginForm.addEventListener('submit', async (submitEvent) => {
+				getElement('thumbnail-api-input-form').addEventListener('submit', async (submitEvent) => {
 					submitEvent.preventDefault();
 					
-					const response = await fetch('/login', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/x-www-form-urlencoded'
-						},
-						body: new URLSearchParams({
-							username: usernameInput.value,
-							password: passwordInput.value
-						})
+					const formData = new FormData(thumbnailInputForm);
+					
+					const response = await fetch('/thumbnail', {
+						method: "POST",
+						body: formData
 					});
 					
-					usernameInput.value = '';
-					passwordInput.value = '';
+					if(!response.ok) {
+						thumbnailOutput.innerText = 'Failed to generate thumbnail';
+						return;
+					}
 					
-					loggedInMessageOutput.innerText = await response.text();
+					const thumbBlob = await response.blob();
+					// thquarepanth
+					const imgSrc = URL.createObjectURL(thumbBlob);
+					
+					thumbnail.src = imgSrc;
+					thumbnailOutput.appendChild(thumbnail);
 				});
 			}
 			
-			// interactivity for user & admin role checks, plus logout
+			// simple feature check for login / spring security
 			{
-				const userCheckBtn = getElement('user-check-btn');
-				const userCheckOutput = getElement('user-check-output');
-				const adminCheckBtn = getElement('admin-check-btn');
-				const adminCheckOutput = getElement('admin-check-output');
-				
-				const logoutBtn = getElement('logout-btn');
-				
-				const wireButton = (btn, output, endpoint) => {
-					btn.addEventListener('click', async (event) => {
-						const response = await fetch(endpoint);
+				// interactivity for POST /login
+				{
+					const loginForm = getElement('login-api-input-form');
+					const passwordInput = getElement('password-input');
+					const usernameInput = getElement('username-input');
+					const loggedInMessageOutput = getElement('logged-in-message');
+					
+					loginForm.addEventListener('submit', async (submitEvent) => {
+						submitEvent.preventDefault();
 						
-						output.innerText = 
-							response.status != 200 || response.headers.get('Content-Type') == 'text/html;charset=UTF-8'
-							? 'NOT confirmed.'
-							: await response.text()
-						;
+						const response = await fetch('/login', {
+							method: 'POST',
+							headers: {
+								'Content-Type': 'application/x-www-form-urlencoded'
+							},
+							body: new URLSearchParams({
+								username: usernameInput.value,
+								password: passwordInput.value
+							})
+						});
+						
+						usernameInput.value = '';
+						passwordInput.value = '';
+						
+						loggedInMessageOutput.innerText = await response.text();
 					});
 				}
 				
-				wireButton(userCheckBtn, userCheckOutput, '/user-endpoint');
-				wireButton(adminCheckBtn, adminCheckOutput, '/admin-endpoint');
-				
-				logoutBtn.addEventListener('click', async (event) => {
-					await fetch('/logout', {method: 'POST'});
+				// interactivity for user & admin role checks, plus logout
+				{
+					const userCheckBtn = getElement('user-check-btn');
+					const userCheckOutput = getElement('user-check-output');
+					const adminCheckBtn = getElement('admin-check-btn');
+					const adminCheckOutput = getElement('admin-check-output');
 					
-					userCheckOutput.innerText = '...';
-					adminCheckOutput.innerText = '...';
-				});
+					const logoutBtn = getElement('logout-btn');
+					
+					const wireButton = (btn, output, endpoint) => {
+						btn.addEventListener('click', async (event) => {
+							const response = await fetch(endpoint);
+							
+							output.innerText = 
+								response.status != 200 || response.headers.get('Content-Type') == 'text/html;charset=UTF-8'
+								? 'NOT confirmed.'
+								: await response.text()
+							;
+						});
+					}
+					
+					wireButton(userCheckBtn, userCheckOutput, '/user-endpoint');
+					wireButton(adminCheckBtn, adminCheckOutput, '/admin-endpoint');
+					
+					logoutBtn.addEventListener('click', async (event) => {
+						await fetch('/logout', {method: 'POST'});
+						
+						userCheckOutput.innerText = '...';
+						adminCheckOutput.innerText = '...';
+					});
+				}
 			}
 		</script>
 	</body>
